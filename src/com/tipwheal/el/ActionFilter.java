@@ -1,7 +1,6 @@
 package com.tipwheal.el;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class ActionFilter {
 	private GameInfo gi = new GameInfo();
@@ -89,6 +88,12 @@ public class ActionFilter {
 			case 6:
 			case 7:
 			case 8:
+				for(int[] loc:ui.getOccupiedCells(action - 5,location, weapon)) {
+					if(!occupied.contains(loc)) {
+						occupied.add(loc);
+					}
+				}
+				break;
 			default:
 				break;
 			}

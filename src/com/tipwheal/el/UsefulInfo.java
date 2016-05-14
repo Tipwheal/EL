@@ -57,7 +57,7 @@ public class UsefulInfo {
 		return result;
 	}
 
-	public ArrayList<int[]> getOccupiedCells(int[] curLoc, int weapon) {
+	public ArrayList<int[]> getOccupiedCells(int direction, int[] curLoc, int weapon) {
 		int[] location = curLoc;
 		ArrayList<int[]> list = new ArrayList<>();
 		if (location[0] == -1) {
@@ -70,8 +70,9 @@ public class UsefulInfo {
 				int[] tmp = new int[2];
 				tmp[0] = location[0] + possibleX[weapon % 3][i];
 				tmp[1] = location[1] + possibleY[weapon % 3][i];
+				tmp = info.rotate(direction, tmp[0], tmp[1]);
 				if (tmp[0] >= 0 && tmp[0] <= 14 && tmp[1] >= 0 && tmp[1] <= 14) {
-					if(!list.contains(tmp)) {
+					if (!list.contains(tmp)) {
 						list.add(tmp);
 					}
 				}

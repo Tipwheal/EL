@@ -79,4 +79,8 @@ public class Behavior {
 	public String getBehavior(int i) {
 		return behaviors.get(i);
 	}
+	
+	public ArrayList<String> getBehaviors() {
+		return behaviors;
+	}
 }

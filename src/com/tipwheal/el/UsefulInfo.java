@@ -57,6 +57,29 @@ public class UsefulInfo {
 		return result;
 	}
 
+	public ArrayList<int[]> getOccupiedCells(int[] curLoc, int weapon) {
+		int[] location = curLoc;
+		ArrayList<int[]> list = new ArrayList<>();
+		if (location[0] == -1) {
+			return null;
+		} else {
+			int[] size = { 4, 5, 7 };
+			int[][] possibleX = { { 0, 0, 0, 0 }, { 0, 0, 1, 1, 2 }, { -1, -1, -1, 0, 1, 1, 1 } };
+			int[][] possibleY = { { 1, 2, 3, 4 }, { 1, 2, 0, 1, 0 }, { -1, 0, 1, 1, 1, -1, 0 } };
+			for (int i = 0; i < size[weapon % 3]; i++) {
+				int[] tmp = new int[2];
+				tmp[0] = location[0] + possibleX[weapon % 3][i];
+				tmp[1] = location[1] + possibleY[weapon % 3][i];
+				if (tmp[0] >= 0 && tmp[0] <= 14 && tmp[1] >= 0 && tmp[1] <= 14) {
+					if(!list.contains(tmp)) {
+						list.add(tmp);
+					}
+				}
+			}
+			return list;
+		}
+	}
+
 	/**
 	 * Get a set of possible attack cells in one occupy action.
 	 * 
@@ -76,7 +99,7 @@ public class UsefulInfo {
 			int[][] possibleY = { { 1, 2, 3, 4 }, { 1, 2, 0, 1, 0 }, { -1, 0, 1, 1, 1, -1, 0 } };
 			for (int i = 0; i < 4; i++) {
 				for (int j = 0; j < size[weapon % 3]; j++) {
-					int[] result = info.rotate(i, possibleX[weapon][j], possibleY[weapon][j]);
+					int[] result = info.rotate(i, possibleX[weapon % 3][j], possibleY[weapon % 3][j]);
 					result[0] += location[0];
 					result[1] += location[1];
 					if (result[0] < 0 || result[0] > 14 || result[1] < 0 || result[1] > 14) {

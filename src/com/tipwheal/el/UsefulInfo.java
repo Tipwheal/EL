@@ -2,6 +2,12 @@ package com.tipwheal.el;
 
 import java.util.*;
 
+/**
+ * Some useful info.
+ * 
+ * @author Yzh
+ *
+ */
 public class UsefulInfo {
 	private GameInfo info = new GameInfo();
 	private int[] location;
@@ -39,6 +45,13 @@ public class UsefulInfo {
 		return location;
 	}
 
+	/**
+	 * Get all ocupied cells by one samurai that you can see.
+	 * 
+	 * @param weapon
+	 *            The weapon ID of samurai.
+	 * @return return a list of cells.
+	 */
 	public int[][] getOccupiedCells(int weapon) {
 		int[][] field = info.getField();
 		ArrayList<int[]> cells = new ArrayList<>();
@@ -57,6 +70,17 @@ public class UsefulInfo {
 		return result;
 	}
 
+	/**
+	 * Get a list of cells that a samurai can occupy by one occupy command.
+	 * 
+	 * @param direction
+	 *            Occupy direction.
+	 * @param curLoc
+	 *            Current location of samurai.
+	 * @param weapon
+	 *            Weapon ID of samurai
+	 * @return A list of cells that's occupied by this occupy action.
+	 */
 	public ArrayList<int[]> getOccupiedCells(int direction, int[] curLoc, int weapon) {
 		int[] location = curLoc;
 		ArrayList<int[]> list = new ArrayList<>();
@@ -119,18 +143,40 @@ public class UsefulInfo {
 		}
 	}
 
+	/**
+	 * Get battle field.
+	 * 
+	 * @return int[][]
+	 */
 	public int[][] getField() {
 		return info.getField();
 	}
 
+	/**
+	 * Get weapon ID of the current samurai.
+	 * 
+	 * @return int weapon.
+	 */
 	public int getWeapon() {
 		return info.getWeapon();
 	}
 
+	/**
+	 * Get turn.
+	 * 
+	 * @return int turn.
+	 */
 	public int getTurn() {
 		return info.getTurn();
 	}
 
+	/**
+	 * Get samurai info according to weapon ID.
+	 * 
+	 * @param weapon
+	 *            Weapon ID of samurai.
+	 * @return SamuraiInfo.
+	 */
 	public SamuraiInfo getSamuraiInfo(int weapon) {
 		return info.getSamuraiInfo()[weapon];
 	}

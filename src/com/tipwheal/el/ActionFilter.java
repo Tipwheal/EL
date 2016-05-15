@@ -79,7 +79,7 @@ public class ActionFilter {
 		ArrayList<String> result = new ArrayList<>();
 		int[] curLocYourself = ui.getSamuraiLocation(yourself);
 		int[] locEnemy = ui.getSamuraiLocation(enemy);
-		if(locEnemy[0] == -1) {
+		if (locEnemy[0] == -1) {
 			return null;
 		}
 		int curDistance = Math.abs(curLocYourself[0] - locEnemy[0]) + Math.abs(curLocYourself[1] - locEnemy[1]);
@@ -88,6 +88,27 @@ public class ActionFilter {
 			int[] location = this.getNextLocation(action, ui.getSamuraiLocation(yourself));
 			finalDistance = Math.abs(location[0] - locEnemy[0]) + Math.abs(location[1] - locEnemy[1]);
 			if (curDistance < finalDistance) {
+				result.add(action);
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Get behaviors that you can get close to an specific enemy if you do the
+	 * actions.
+	 * 
+	 * @param yourself
+	 *            The weapon ID of the samurai to get close to the enemy.
+	 * @param enemy
+	 *            The weapon ID of enemy.
+	 * @return A list of action strings.
+	 */
+	public ArrayList<String> getCloseToEemy(int yourself, int enemy) {
+		ArrayList<String> result = new ArrayList<>();
+		int[] curLoc = ui.getSamuraiLocation(yourself);
+		for (String action : behavior.getBehaviors()) {
+			if (!curLoc.equals(getNextLocation(action, curLoc)) && !avoidEnemy(yourself, enemy).contains(action)) {
 				result.add(action);
 			}
 		}

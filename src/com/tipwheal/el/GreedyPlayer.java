@@ -2,7 +2,7 @@ package com.tipwheal.el;
 
 import java.util.Random;
 
-public class GreedyPlayer extends Player{
+public class GreedyPlayer extends Player {
 	private final int[] cost = { 0, 4, 4, 4, 4, 2, 2, 2, 2, 1, 1 };
 	private final int maxPower = 7;
 	private Random rnd;
@@ -15,7 +15,7 @@ public class GreedyPlayer extends Player{
 		return null;
 	}
 
-	public GameInfo play2(GameInfo info) {
+	public GameInfo randomPlay(GameInfo info) {
 		int power = maxPower;
 		int action;
 

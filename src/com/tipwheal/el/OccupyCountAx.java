@@ -27,7 +27,7 @@ public class OccupyCountAx {
 		}
 	}
 
-	private ArrayList<String> occupyCountAx(int d) {
+	public ArrayList<String> occupyCountAx(int d) {
 		// d==1，输出占领的
 		// d==2，输出什么都不发生的
 		// d==3，输出被占领的

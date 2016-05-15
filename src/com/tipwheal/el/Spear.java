@@ -5,10 +5,29 @@ package com.tipwheal.el;
  */
 import java.util.ArrayList;
 
-class Spear {
+/**
+ * Use to get area that spear can attack.
+ * @author Wx
+ *
+ */
+public class Spear {
 	private int[] myLocation = new int[2];
 
-	ArrayList<int[]> getArea(String direction, int[] L) {
+	/**
+	 * Get the cells in the direction of a location.
+	 * 
+	 * @param direction
+	 *            <br>
+	 *            About direction:<br>
+	 *            1 south<br>
+	 *            2 east<br>
+	 *            3 west<br>
+	 *            4 north<br>
+	 * @param L
+	 *            Location
+	 * @return A list of cells.
+	 */
+	public ArrayList<int[]> getArea(String direction, int[] L) {
 		myLocation = L;
 		ArrayList<int[]> list = new ArrayList<int[]>();
 		switch (direction) {
@@ -29,6 +48,10 @@ class Spear {
 		return list;
 	}
 
+	/**
+	 * Attack south.
+	 * @return A list of cells.
+	 */
 	private ArrayList<int[]> South() {
 		ArrayList<int[]> list = new ArrayList<int[]>();
 		for (int i = 1; i < 5; i++) {
@@ -41,6 +64,10 @@ class Spear {
 		return list;
 	}
 
+	/**
+	 * Attack east.
+	 * @return A list of cells.
+	 */
 	private ArrayList<int[]> East() {
 		ArrayList<int[]> list = new ArrayList<int[]>();
 		for (int i = 1; i < 5; i++) {
@@ -53,6 +80,10 @@ class Spear {
 		return list;
 	}
 
+	/**
+	 * Attack west.
+	 * @return A list of cells.
+	 */
 	private ArrayList<int[]> West() {
 		ArrayList<int[]> list = new ArrayList<int[]>();
 		for (int i = 1; i < 5; i++) {
@@ -65,6 +96,10 @@ class Spear {
 		return list;
 	}
 
+	/**
+	 * Attack north.
+	 * @return A list of cells.
+	 */
 	private ArrayList<int[]> North() {
 		ArrayList<int[]> list = new ArrayList<int[]>();
 		for (int i = 1; i < 5; i++) {
@@ -77,7 +112,7 @@ class Spear {
 		return list;
 	}
 
-	int[] location(int[] location, String s) {
+	public int[] location(int[] location, String s) {
 		switch (s) {
 		case "5":
 			try {
@@ -125,7 +160,7 @@ class Spear {
 		return location;
 	}
 
-	int isHide(int isHide, String s) {
+	public int isHide(int isHide, String s) {
 		if (s.equals("9"))
 			isHide = 1;
 		else
@@ -133,7 +168,7 @@ class Spear {
 		return isHide;
 	}
 
-	int[][] newBoard(int[][] board, String s, int[] L) {
+	public int[][] newBoard(int[][] board, String s, int[] L) {
 		ArrayList<int[]> getArea = getArea(s, L);
 		for (int[] location : getArea) {
 			try {
@@ -143,6 +178,5 @@ class Spear {
 			}
 		}
 		return board;
-
 	}
 }

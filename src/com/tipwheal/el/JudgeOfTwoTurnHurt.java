@@ -10,7 +10,12 @@ public class JudgeOfTwoTurnHurt {
 	private int[] myLocation = new int[2];
 	private int[] enemyLoca = new int[2];
 
-	public ArrayList<String> judgeOfTwoTurnHert() {
+	/**
+	 * Get actions that your samurai can attack enemy in two turns.
+	 * 
+	 * @return A list of actions.
+	 */
+	public ArrayList<String> judgeOfTwoTurnHurt() {
 		ArrayList<String> list = new ArrayList<String>();
 		ArrayList<String> list1 = new ArrayList<String>();
 
@@ -44,14 +49,14 @@ public class JudgeOfTwoTurnHurt {
 		// judge for isTurn
 		if (info.getSide() == 0) {
 			for (int i = weapon + 7; i < info.getTurn(); i = i + 12) {
-				if (info.getTurns() == i) {
+				if (info.getTurn() == i) {
 					isTurn = true;
 					break;
 				}
 			}
 		} else {
 			for (int i = weapon + 1; i < info.getTurn(); i = i + 12) {
-				if (info.getTurns() == i) {
+				if (info.getTurn() == i) {
 					isTurn = true;
 					break;
 				}

@@ -1,5 +1,8 @@
 package com.tipwheal.el;
 
+/**
+ * To start ai program.
+ */
 public class Main {
 	public static void main(String[] argv) {
 		GameInfo info = new GameInfo();
@@ -16,5 +19,4 @@ public class Main {
 			}
 		}
 	}
-
 }

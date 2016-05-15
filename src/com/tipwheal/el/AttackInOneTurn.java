@@ -9,7 +9,9 @@ import java.util.ArrayList;
  *
  */
 public class AttackInOneTurn {
-	UsefulInfo info = new UsefulInfo();
+	private UsefulInfo info = new UsefulInfo();
+	private Behavior behavior = new Behavior(info.getSamuraiInfo(info.getWeapon()).getHidden());
+	private ActionFilter filter = new ActionFilter();
 
 	/**
 	 * Get possible locations a samurai can reach if it occupy some cells in
@@ -100,6 +102,90 @@ public class AttackInOneTurn {
 			for (int[] loc : info.getPosAtkCells(pos, weapon)) {
 				if (!result.contains(loc)) {
 					result.add(loc);
+				}
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Get actions after doing which there will be some enemies in the area you
+	 * can attack next turn.
+	 * 
+	 * @return A list of action strings.
+	 */
+	public ArrayList<String> enemyInAtkArea() {
+		ArrayList<String> result = new ArrayList<>();
+		for (int i = 3; i < 6; i++) {
+			for (String action : enemyInAtkArea(i)) {
+				if (!result.contains(action)) {
+					result.add(action);
+				}
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Get actions after doing which there will be a specific enemy in the area
+	 * you can attack next turn.
+	 * 
+	 * @param enemy
+	 *            The samurai you want to get close to so you can attack.
+	 * @return A list of action strings.
+	 */
+	public ArrayList<String> enemyInAtkArea(int enemy) {
+		ArrayList<String> result = new ArrayList<>();
+		if (info.getSamuraiLocation(enemy) == null) {
+			return null;
+		} else {
+			for (String action : behavior.getBehaviors()) {
+				int[] loc = filter.getNextLocation(action, info.getSamuraiLocation(info.getWeapon()));
+				ArrayList<int[]> area = posAtkOneTurn(loc, info.getWeapon());
+				if (area.contains(info.getSamuraiLocation(enemy))) {
+					result.add(action);
+				}
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Get actions after doing which you will go into the area that will be
+	 * attack by some enemy.
+	 * 
+	 * @return A list of action strings.
+	 */
+	public ArrayList<String> inEnemyAtkArea() {
+		ArrayList<String> result = new ArrayList<>();
+		for (int i = 3; i < 6; i++) {
+			for (String action : inEnemyAtkArea(i)) {
+				if (!result.contains(action)) {
+					result.add(action);
+				}
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Get actions after doing which you will go into the area that will be
+	 * attack by a specific enemy.
+	 * 
+	 * @param enemy
+	 *            The weapon ID of enemy.
+	 * @return A list of action strings.
+	 */
+	public ArrayList<String> inEnemyAtkArea(int enemy) {
+		ArrayList<String> result = new ArrayList<>();
+		if (info.getSamuraiLocation(enemy) == null) {
+			return null;
+		} else {
+			for (String action : behavior.getBehaviors()) {
+				int[] loc = filter.getNextLocation(action, info.getSamuraiLocation(info.getWeapon()));
+				ArrayList<int[]> area = this.posAtkOneTurn(info.getSamuraiLocation(enemy), enemy);
+				if (area.contains(loc)) {
+					result.add(action);
 				}
 			}
 		}

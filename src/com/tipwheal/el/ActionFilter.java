@@ -3,7 +3,6 @@ package com.tipwheal.el;
 import java.util.ArrayList;
 
 public class ActionFilter {
-	private GameInfo gi = new GameInfo();
 	private UsefulInfo ui = new UsefulInfo();
 	private Behavior behavior = new Behavior(ui.getSamuraiInfo(ui.getWeapon()).getHidden());
 	private int[][] field;
@@ -15,11 +14,18 @@ public class ActionFilter {
 				field[i][j] = field[i][j];
 			}
 		}
+		curLocation = ui.getSamuraiLocation(ui.getWeapon());
 	}
 
-	public ArrayList<int[]> canAttack(int weapon) {
+	public ArrayList<String> canAttack(int weapon) {
+		ArrayList<String> result = new ArrayList<>();
 		for (String action : behavior.getBehaviors()) {
-
+			ArrayList<int[]> occupied = getNextOccupiedLocation(action, curLocation, ui.getWeapon());
+			for (int i = 3; i < 6; i++) {
+				if (occupied.contains(ui.getSamuraiLocation(i))&&!result.contains(action)) {
+					result.add(action);
+				}
+			}
 		}
 		return null;
 	}
@@ -88,8 +94,8 @@ public class ActionFilter {
 			case 6:
 			case 7:
 			case 8:
-				for(int[] loc:ui.getOccupiedCells(action - 5,location, weapon)) {
-					if(!occupied.contains(loc)) {
+				for (int[] loc : ui.getOccupiedCells(action - 5, location, weapon)) {
+					if (!occupied.contains(loc)) {
 						occupied.add(loc);
 					}
 				}
@@ -98,6 +104,6 @@ public class ActionFilter {
 				break;
 			}
 		}
-		return null;
+		return occupied;
 	}
 }

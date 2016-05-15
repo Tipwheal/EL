@@ -3,38 +3,38 @@ package com.tipwheal.el;
 import java.util.ArrayList;
 
 public class Switcher {
-	private int[] myLocation;
 	private String[] actions;
 	private Spear spear = new Spear();
 	private Sword sword = new Sword();
 	private Ax ax = new Ax();
 	private int ID;
 
-	public Switcher(String s, int[] location, int id) {
-		myLocation = location;
+	public Switcher(String s, int id) {
 		actions = s.split(" ");
 		ID = id;
 	}
 
-	public int[] getDoneLoca() {
-		int[] doneLoca = myLocation;
+	public int[] getDoneLoca(int[] myLoca) {
+		int[] doneLoca = new int[2];
+		doneLoca[0] = myLoca[0];
+		doneLoca[1] = myLoca[1];
 		for (int i = 0; i < actions.length; i++) {
 			switch (actions[i]) {
 			case "5":
 				if (doneLoca[1] < 14)
-					doneLoca[1]++;
+					doneLoca[1] += 1;
 				break;
 			case "6":
 				if (doneLoca[0] < 14)
-					doneLoca[0]++;
+					doneLoca[0] += 1;
 				break;
 			case "7":
 				if (doneLoca[1] > 0)
-					doneLoca[1]--;
+					doneLoca[1] -= 1;
 				break;
 			case "8":
 				if (doneLoca[0] > 0)
-					doneLoca[0]--;
+					doneLoca[0] -= 1;
 				break;
 			}
 		}
@@ -42,8 +42,10 @@ public class Switcher {
 		return doneLoca;
 	}
 
-	public ArrayList<int[]> getAreaOfThisBehavior() {
-		int[] doneLoca = myLocation;
+	public ArrayList<int[]> getAreaOfThisBehavior(int[] myLoca) {
+		int[] doneLoca = new int[2];
+		doneLoca[0] = myLoca[0];
+		doneLoca[1] = myLoca[1];
 		for (int i = 0; i < actions.length; i++) {
 
 			switch (actions[i]) {

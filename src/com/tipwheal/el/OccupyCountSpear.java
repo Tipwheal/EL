@@ -16,7 +16,7 @@ public class OccupyCountSpear {
 	private Behavior behavior = new Behavior(isHide);
 
 	// 以上是三个武士的位置
-	OccupyCountSpear() {
+	public OccupyCountSpear() {
 
 		int[][] boardSeen = new int[15][15];
 		for (int i = 0; i < 15; i++) {
@@ -27,7 +27,7 @@ public class OccupyCountSpear {
 		}
 	}
 
-	private ArrayList<String> occupyCountSpear(int d) {
+	public ArrayList<String> occupyCountSpear(int d) {
 		// d==1，输出占领的
 		// d==2，输出什么都不发生的
 		// d==3，输出被占领的

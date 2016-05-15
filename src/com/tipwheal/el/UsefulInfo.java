@@ -144,6 +144,46 @@ public class UsefulInfo {
 	}
 
 	/**
+	 * Get possible attack cells in one occupy action.<br>
+	 * 
+	 * @param loc
+	 *            The location of a samurai.
+	 * @param weapon
+	 *            The weapon ID of the samurai.
+	 * @return A list of locations.
+	 */
+	public ArrayList<int[]> getPosAtkCells(int[] loc, int weapon) {
+		ArrayList<int[]> list = new ArrayList<>();
+		int[] location = new int[2];
+		location[0] = loc[0];
+		location[1] = loc[1];
+		weapon = weapon % 3;
+		int[] size = { 4, 5, 7 };
+		int[][] possibleX = { { 0, 0, 0, 0 }, { 0, 0, 1, 1, 2 }, { -1, -1, -1, 0, 1, 1, 1 } };
+		int[][] possibleY = { { 1, 2, 3, 4 }, { 1, 2, 0, 1, 0 }, { -1, 0, 1, 1, 1, -1, 0 } };
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < size[weapon]; j++) {
+				int[] result = info.rotate(i, possibleX[weapon][j], possibleY[weapon][j]);
+				result[0] += location[0];
+				result[1] += location[1];
+				if (result[0] < 0 || result[0] > 14 || result[1] < 0 || result[1] > 14) {
+					break;
+				}
+				for (int k = 0; k < 6; k++) {
+					if (info.getSamuraiInfo()[k].getHomeX() == result[0]
+							&& info.getSamuraiInfo()[k].getHomeY() == result[1]) {
+						break;
+					}
+					if (!list.contains(result)) {
+						list.add(result);
+					}
+				}
+			}
+		}
+		return list;
+	}
+
+	/**
 	 * Get battle field.
 	 * 
 	 * @return int[][]

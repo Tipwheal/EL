@@ -1,9 +1,12 @@
 package com.tipwheal.el;
 
+/**
+ * Copied from万霄on 2016/5/12.
+ */
 import java.util.ArrayList;
 
 public class Sword {
-	int[] myLocation = new int[2];
+	private int[] myLocation = new int[2];
 
 	public ArrayList<int[]> getArea(String direction, int[] L) {
 		myLocation = L;
@@ -70,5 +73,73 @@ public class Sword {
 		change[0] = myLocation[0] + x;
 		change[1] = myLocation[1] + y;
 		return change;
+	}
+
+	int[] location(int[] location, String s) {
+		switch (s) {
+		case "5":
+			try {
+				if (location[1] >= 1)
+					location[1]--;
+				else
+					break;
+			} catch (ArrayIndexOutOfBoundsException e) {
+				break;
+			}
+			break;
+		case "6":
+			try {
+				if (location[1] < 15)
+					location[1]++;
+				else
+					break;
+			} catch (ArrayIndexOutOfBoundsException e) {
+				break;
+			}
+			break;
+		case "7":
+			try {
+				if (location[0] >= 1)
+					location[0]--;
+				else
+					break;
+				;
+			} catch (ArrayIndexOutOfBoundsException e) {
+				break;
+			}
+			break;
+		case "8":
+			try {
+				if (location[1] < 15)
+					location[1]++;
+				else
+					break;
+				;
+			} catch (ArrayIndexOutOfBoundsException e) {
+				break;
+			}
+			break;
+		}
+		return location;
+	}
+
+	int isHide(int isHide, String s) {
+		if (s.equals("9"))
+			isHide = 1;
+		else
+			isHide = 0;
+		return isHide;
+	}
+
+	int[][] newBoard(int[][] board, String s, int[] L) {
+		ArrayList<int[]> getArea = getArea(s, L);
+		for (int[] location : getArea) {
+			try {
+				board[location[0]][location[1]] = 0;
+			} catch (ArrayIndexOutOfBoundsException e) {
+
+			}
+		}
+		return board;
 	}
 }

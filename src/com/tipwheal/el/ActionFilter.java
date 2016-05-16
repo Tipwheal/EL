@@ -133,6 +133,7 @@ public class ActionFilter {
 	}
 
 	/**
+	 * 需要改
 	 * 追杀敌方武士减分加权的筛选行为list Get behaviors that you can avoid an specific enemy if
 	 * you do them. by朱晨乾
 	 * 

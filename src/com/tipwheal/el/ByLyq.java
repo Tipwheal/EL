@@ -24,10 +24,6 @@ public class ByLyq {
 		}
 	}
 
-	public static void main(String[] args) {
-
-	}
-
 	/**
 	 * 假装自己是游戏解析器，脑部局势 注意：此处赋值出全地图情况
 	 * 

@@ -191,4 +191,112 @@ public class AttackInOneTurn {
 		}
 		return result;
 	}
+
+	/**
+	 * Get actions that, if your samurai is now in the attack area of an enemy,
+	 * then get out of this area.
+	 * 
+	 * @param yourself
+	 *            The weapon ID of your samurai.
+	 * @return A list of action strings.
+	 */
+	public ArrayList<String> getOutOfEnemyAtkArea(int yourself) {
+		ArrayList<String> result = new ArrayList<>();
+		boolean in = false;
+		for (int i = 3; i < 6; i++) {
+			if (posAtkOneTurn(info.getSamuraiLocation(i), i).contains(info.getSamuraiLocation(yourself))) {
+				in = true;
+			}
+		}
+		if (in) {
+			int[] curLoc = info.getSamuraiLocation(yourself);
+			for (String action : behavior.getBehaviors()) {
+				int[] loc = filter.getNextLocation(action, curLoc);
+				for (int i = 3; i < 6; i++) {
+					if ((!posAtkOneTurn(info.getSamuraiLocation(i), i).contains(loc)) && (!result.contains(action))) {
+						result.add(action);
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * 
+	 * @param yourself
+	 * @return
+	 */
+	public ArrayList<String> getFarFromEnemyAtkArea(int yourself) {
+		ArrayList<String> result = new ArrayList<>();
+		OccupyArea area = new OccupyArea(info.getSamuraiLocation(yourself), yourself);
+		for (int[] loc : area.Manhattan(info.getSamuraiLocation(yourself), 5)) {
+			ArrayList<Integer> enemies = new ArrayList<>();
+			for (int i = 3; i < 6; i++) {
+				if (info.getSamuraiLocation(i) == null) {
+					break;
+				}
+				for (int[] loc1 : posAtkOneTurn(info.getSamuraiLocation(i), i)) {
+					if (loc[0] == loc1[0] && loc[1] == loc1[1]) {
+						enemies.add(i);
+						break;
+					}
+				}
+			}
+			for (int i : enemies) {
+				int[] yourLoc = info.getSamuraiLocation(yourself);
+				int[] enemyLoc = info.getSamuraiLocation(i);
+				int distence = Math.abs(yourLoc[0] - enemyLoc[0]) + Math.abs(yourLoc[1] - enemyLoc[1]);
+				for (String action : behavior.getBehaviors()) {
+					int[] nextLoc = filter.getNextLocation(action, yourLoc);
+					if (Math.abs(nextLoc[0] - enemyLoc[0]) + Math.abs(nextLoc[1] - enemyLoc[1]) > distence
+							&& !posAtkOneTurn(enemyLoc, i).contains(nextLoc)) {
+						if (!result.contains(action)) {
+							result.add(action);
+						}
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * 
+	 * @param yourself
+	 * @return
+	 */
+	public ArrayList<String> getCloseToEnemyAtkArea(int yourself) {
+		ArrayList<String> result = new ArrayList<>();
+		OccupyArea area = new OccupyArea(info.getSamuraiLocation(yourself), yourself);
+		for (int[] loc : area.Manhattan(info.getSamuraiLocation(yourself), 5)) {
+			ArrayList<Integer> enemies = new ArrayList<>();
+			for (int i = 3; i < 6; i++) {
+				if (info.getSamuraiLocation(i) == null) {
+					break;
+				}
+				for (int[] loc1 : posAtkOneTurn(info.getSamuraiLocation(i), i)) {
+					if (loc[0] == loc1[0] && loc[1] == loc1[1]) {
+						enemies.add(i);
+						break;
+					}
+				}
+			}
+			for (int i : enemies) {
+				int[] yourLoc = info.getSamuraiLocation(yourself);
+				int[] enemyLoc = info.getSamuraiLocation(i);
+				int distence = Math.abs(yourLoc[0] - enemyLoc[0]) + Math.abs(yourLoc[1] - enemyLoc[1]);
+				for (String action : behavior.getBehaviors()) {
+					int[] nextLoc = filter.getNextLocation(action, yourLoc);
+					if (Math.abs(nextLoc[0] - enemyLoc[0]) + Math.abs(nextLoc[1] - enemyLoc[1]) < distence
+							&& !posAtkOneTurn(enemyLoc, i).contains(nextLoc)) {
+						if (!result.contains(action)) {
+							result.add(action);
+						}
+					}
+				}
+			}
+		}
+		return result;
+	}
 }

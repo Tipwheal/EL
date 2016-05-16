@@ -86,45 +86,23 @@ public class Ax {
 	int[] location(int[] location, String s) {
 		switch (s) {
 		case "5":
-			try {
-				if (location[1] >= 1)
-					location[1]--;
-				else
-					break;
-			} catch (ArrayIndexOutOfBoundsException e) {
-				break;
+			if (location[1] >= 1) {
+				location[1]--;
 			}
 			break;
 		case "6":
-			try {
-				if (location[1] < 15)
-					location[1]++;
-				else
-					break;
-			} catch (ArrayIndexOutOfBoundsException e) {
-				break;
+			if (location[1] < 15) {
+				location[1]++;
 			}
 			break;
 		case "7":
-			try {
-				if (location[0] >= 1)
-					location[0]--;
-				else
-					break;
-				;
-			} catch (ArrayIndexOutOfBoundsException e) {
-				break;
+			if (location[0] >= 1) {
+				location[0]--;
 			}
 			break;
 		case "8":
-			try {
-				if (location[1] < 15)
-					location[1]++;
-				else
-					break;
-				;
-			} catch (ArrayIndexOutOfBoundsException e) {
-				break;
+			if (location[1] < 15) {
+				location[1]++;
 			}
 			break;
 		}
@@ -142,11 +120,7 @@ public class Ax {
 	int[][] newBoard(int[][] board, String s, int[] L) {
 		ArrayList<int[]> getArea = getArea(s, L);
 		for (int[] location : getArea) {
-			try {
-				board[location[0]][location[1]] = 0;
-			} catch (ArrayIndexOutOfBoundsException e) {
-
-			}
+			board[location[0]][location[1]] = 0;
 		}
 		return board;
 	}

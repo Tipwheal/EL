@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 /**
  * Use to get area that spear can attack.
+ * 
  * @author Wx
  *
  */
@@ -50,6 +51,7 @@ public class Spear {
 
 	/**
 	 * Attack south.
+	 * 
 	 * @return A list of cells.
 	 */
 	private ArrayList<int[]> South() {
@@ -66,6 +68,7 @@ public class Spear {
 
 	/**
 	 * Attack east.
+	 * 
 	 * @return A list of cells.
 	 */
 	private ArrayList<int[]> East() {
@@ -82,6 +85,7 @@ public class Spear {
 
 	/**
 	 * Attack west.
+	 * 
 	 * @return A list of cells.
 	 */
 	private ArrayList<int[]> West() {
@@ -98,6 +102,7 @@ public class Spear {
 
 	/**
 	 * Attack north.
+	 * 
 	 * @return A list of cells.
 	 */
 	private ArrayList<int[]> North() {
@@ -115,45 +120,23 @@ public class Spear {
 	public int[] location(int[] location, String s) {
 		switch (s) {
 		case "5":
-			try {
-				if (location[1] >= 1)
-					location[1]--;
-				else
-					break;
-			} catch (ArrayIndexOutOfBoundsException e) {
-				break;
+			if (location[1] >= 1) {
+				location[1]--;
 			}
 			break;
 		case "6":
-			try {
-				if (location[1] < 15)
-					location[1]++;
-				else
-					break;
-			} catch (ArrayIndexOutOfBoundsException e) {
-				break;
+			if (location[1] < 15) {
+				location[1]++;
 			}
 			break;
 		case "7":
-			try {
-				if (location[0] >= 1)
-					location[0]--;
-				else
-					break;
-				;
-			} catch (ArrayIndexOutOfBoundsException e) {
-				break;
+			if (location[0] >= 1) {
+				location[0]--;
 			}
 			break;
 		case "8":
-			try {
-				if (location[1] < 15)
-					location[1]++;
-				else
-					break;
-				;
-			} catch (ArrayIndexOutOfBoundsException e) {
-				break;
+			if (location[1] < 15) {
+				location[1]++;
 			}
 			break;
 		}
@@ -171,11 +154,7 @@ public class Spear {
 	public int[][] newBoard(int[][] board, String s, int[] L) {
 		ArrayList<int[]> getArea = getArea(s, L);
 		for (int[] location : getArea) {
-			try {
-				board[location[0]][location[1]] = 0;
-			} catch (ArrayIndexOutOfBoundsException e) {
-
-			}
+			board[location[0]][location[1]] = 0;
 		}
 		return board;
 	}

@@ -12,7 +12,17 @@ public class GreedyPlayer extends Player {
 	}
 
 	public GameInfo play(GameInfo info) {
-		return null;
+//		Counter counter = new Counter();
+//		int i = -1;
+//		double max;
+//		for(int j = 0;j<counter.getScore().length;j++) {
+//			if(score>max) {
+//				i = j;
+//				max = score;
+//			}
+//		}
+//		
+		return new GameInfo(info);
 	}
 
 	public GameInfo randomPlay(GameInfo info) {

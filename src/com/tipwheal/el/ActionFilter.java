@@ -67,8 +67,8 @@ public class ActionFilter {
 	}
 
 	/**
-	 * 规避敌方特定武士（规避1） Get behaviors that you can avoid an specific enemy if you
-	 * do them. by杨子航
+	 * 规避敌方特定武士（规避1）<br>
+	 * Get behaviors that you can avoid an specific enemy if you do them. by杨子航
 	 * 
 	 * @param yourself
 	 *            The samurai ID to avoid enemy.
@@ -96,8 +96,8 @@ public class ActionFilter {
 	}
 
 	/**
-	 * 规避敌方区域（规避2） Get behaviors that you can avoid an specific enemy if you do
-	 * them. by朱晨乾
+	 * 规避敌方区域（规避2） <br>
+	 * Get behaviors that you can avoid an specific enemy if you do them. by朱晨乾
 	 * 
 	 * @param yourself
 	 *            The samurai ID to avoid enemy.
@@ -198,8 +198,6 @@ public class ActionFilter {
 	 *            The String of acitons to be analyze.
 	 * @param curLoc
 	 *            The current location of a samurai ai.
-	 * @param weapon
-	 *            The weapon ID of the samurai.
 	 * @return An int[] that content the final location.
 	 */
 	public int[] getNextLocation(String actionLine, int[] curLoc) {

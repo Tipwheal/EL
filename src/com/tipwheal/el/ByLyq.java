@@ -7,13 +7,13 @@ public class ByLyq {
 	/***
 	 * test方法
 	 */
-	int[] first = { 0, 5 };
-	int[] second = { 0, 14 };
-	int[] third = { 9, 14 };
-	int[][] board = board();
+	private int[] first = { 0, 5 };
+	private int[] second = { 0, 14 };
+	private int[] third = { 9, 14 };
+	private int[][] board = board();
 
 	// 以上是三个武士的位置
-	ByLyq() {
+	public ByLyq() {
 
 		int[][] boardSeen = new int[15][15];
 		for (int i = 0; i < 15; i++) {
@@ -113,4 +113,19 @@ public class ByLyq {
 		return score;
 	}
 
+	public int[] getFirst() {
+		return first;
+	}
+
+	public int[] getSecond() {
+		return second;
+	}
+
+	public int[] getThird() {
+		return third;
+	}
+
+	public int[][] getBoard() {
+		return board;
+	}
 }

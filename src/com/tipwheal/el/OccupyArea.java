@@ -14,12 +14,12 @@ public class OccupyArea {
 	public ArrayList<int[]> getBiggestOccupyArea(int size) {
 		ArrayList<int[]> list = new ArrayList<int[]>();
 		ArrayList<int[]> list1 = new ArrayList<int[]>();
-		list.addAll(this.Manhattan(myLocation, size));
+		list.addAll(this.manhattan(myLocation, size));
 		for (int i = 0; i < list.size(); i++) {
 			list1.addAll(this.getOccupyArea(list.get(i)));
 		}
 		list.addAll(list1);
-		return this.Remove(list);
+		return this.remove(list);
 	}
 
 	public ArrayList<int[]> getCanBeHertArea(int[] enemyLoca) {
@@ -27,10 +27,10 @@ public class OccupyArea {
 		ArrayList<int[]> list1 = new ArrayList<int[]>();
 		list.addAll(this.getOccupyArea(enemyLoca));
 		for (int i = 0; i < list.size(); i++) {
-			list1.addAll(this.Manhattan(list.get(i), 1));
+			list1.addAll(this.manhattan(list.get(i), 1));
 		}
 		list.addAll(list1);
-		list = this.Remove(list);
+		list = this.remove(list);
 		for (int i = 0; i < list.size(); i++) {
 			if (Math.abs(list.get(i)[0] - enemyLoca[0]) + Math.abs(list.get(i)[1] - enemyLoca[1]) > 4) {
 				list.remove(i);
@@ -60,7 +60,7 @@ public class OccupyArea {
 		for (int i = 1; i < 5; i++) {
 			list.addAll(spear.getArea(Integer.toString(i), currentLoca));
 		}
-		return this.Remove(list);
+		return this.remove(list);
 	}
 
 	public ArrayList<int[]> getSwordOccupyArea(int[] currentLoca) {
@@ -69,7 +69,7 @@ public class OccupyArea {
 		for (int i = 1; i < 5; i++) {
 			list.addAll(sword.getArea(Integer.toString(i), currentLoca));
 		}
-		return this.Remove(list);
+		return this.remove(list);
 	}
 
 	public ArrayList<int[]> getAXOccupyArea(int[] currentLoca) {
@@ -78,10 +78,10 @@ public class OccupyArea {
 		for (int i = 1; i < 5; i++) {
 			list.addAll(ax.getArea(Integer.toString(i), currentLoca));
 		}
-		return this.Remove(list);
+		return this.remove(list);
 	}
 
-	public ArrayList<int[]> Remove(ArrayList<int[]> list) {
+	public ArrayList<int[]> remove(ArrayList<int[]> list) {
 		ArrayList<int[]> a = new ArrayList<int[]>();
 		for (int i = 1; i < list.size(); i++) {
 			boolean tag = true;
@@ -100,7 +100,7 @@ public class OccupyArea {
 		return a;
 	}
 
-	public ArrayList<int[]> Manhattan(int[] location, int size) {
+	public ArrayList<int[]> manhattan(int[] location, int size) {
 		ArrayList<int[]> list = new ArrayList<int[]>();
 		for (int i = -size; i <= size; i++) {
 			int anotherAxis = Math.abs(size - Math.abs(i));
@@ -109,6 +109,6 @@ public class OccupyArea {
 				list.add(loca);
 			}
 		}
-		return this.Remove(list);
+		return this.remove(list);
 	}
 }

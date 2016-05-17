@@ -3,7 +3,8 @@ package com.tipwheal.el;
 import java.io.BufferedReader;
 
 public class CommentedIStream {
-	// BufferedReader stdReader = new BufferedReader(new InputStreamReader(System.in));
+	// BufferedReader stdReader = new BufferedReader(new
+	// InputStreamReader(System.in));
 	public static String[] read(BufferedReader stdReader) {
 		String line = "";
 		try {

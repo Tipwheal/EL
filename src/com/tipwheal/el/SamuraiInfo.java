@@ -4,7 +4,7 @@ public class SamuraiInfo {
 	private int homeX, homeY;
 	private int curX, curY;
 	private int rank, score, hidden;
-	
+
 	public SamuraiInfo(SamuraiInfo info) {
 		homeX = info.getHomeX();
 		homeY = info.getHomeY();

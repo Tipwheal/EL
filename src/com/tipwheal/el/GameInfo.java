@@ -210,22 +210,18 @@ public class GameInfo {
 	 */
 	public int[] rotate(int direction, int x0, int y0) {
 		int[] res = { 0, 0 };
-		// 方向不变
 		if (direction == 0) {
 			res[0] = x0;
 			res[1] = y0;
 		}
-		// 顺时针90°
 		if (direction == 1) {
 			res[0] = y0;
 			res[1] = -x0;
 		}
-		// 转180°
 		if (direction == 2) {
 			res[0] = -x0;
 			res[1] = -y0;
 		}
-		// 逆时针90°
 		if (direction == 3) {
 			res[0] = -y0;
 			res[1] = x0;

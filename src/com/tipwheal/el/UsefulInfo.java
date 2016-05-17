@@ -9,13 +9,14 @@ import java.util.*;
  *
  */
 public class UsefulInfo {
-	private GameInfo info = new GameInfo();
+	private GameInfo info;
 	private int[] location;
 
 	/**
 	 * Constructs a UsefulInfo and initialize location a new int[2].
 	 */
-	public UsefulInfo() {
+	public UsefulInfo(GameInfo info) {
+		this.info = info;
 		location = new int[2];
 	}
 
@@ -27,7 +28,8 @@ public class UsefulInfo {
 	 * @param y
 	 *            The first int in location.
 	 */
-	public UsefulInfo(int x, int y) {
+	public UsefulInfo(GameInfo info, int x, int y) {
+		this.info = info;
 		int[] tmp = { x, y };
 		location = tmp;
 	}
@@ -56,7 +58,7 @@ public class UsefulInfo {
 		int[][] field = info.getField();
 		ArrayList<int[]> cells = new ArrayList<>();
 		for (int i = 0; i < 15; i++) {
-			for (int j = 0; i < 15; j++) {
+			for (int j = 0; j < 15; j++) {
 				if (field[j][i] == weapon) {
 					int[] tmp = { i, j };
 					cells.add(tmp);

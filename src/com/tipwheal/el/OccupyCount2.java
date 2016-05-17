@@ -7,16 +7,20 @@ public class OccupyCount2 {
 	private int ID;
 	private int[][] board;
 	private ArrayList<int[]> countOccupyCells = new ArrayList<>();
+	private GameInfo gi;
+	private UsefulInfo usefulInfo;
+	private Spear spear = new Spear();
+	private Sword sword = new Sword();
+	private Ax ax = new Ax();
+	
+	public OccupyCount2(GameInfo info) {
+		gi = info;
+		usefulInfo = new UsefulInfo(gi);
+	}
 
 	public ArrayList<int[]> getCountOccupyCells() {
 		return countOccupyCells;
 	}
-
-	private GameInfo gi = new GameInfo();
-	private UsefulInfo usefulInfo = new UsefulInfo();
-	private Spear spear = new Spear();
-	private Sword sword = new Sword();
-	private Ax ax = new Ax();
 
 	public OccupyCount2(int[] l, int id) {
 		myLocation = l;

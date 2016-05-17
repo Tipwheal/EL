@@ -12,7 +12,7 @@ public class GreedyPlayer extends Player {
 	}
 
 	public GameInfo play(GameInfo info) {
-		Counter counter = new Counter();
+		Counter counter = new Counter(info);
 		int i = -1;
 		double max = -1;
 		double[] score = counter.getScore();

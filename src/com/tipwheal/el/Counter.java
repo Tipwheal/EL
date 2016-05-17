@@ -1,12 +1,21 @@
 package com.tipwheal.el;
 
 public class Counter {
-	private GameInfo gi = new GameInfo();
-	private Behavior behavior = new Behavior(gi.getSamuraiInfo()[gi.getWeapon()].getHidden());
-	private double[] score = new double[behavior.behaviors.size()];
-	private ActionFilter filter = new ActionFilter();
-	private AttackInOneTurn aiot = new AttackInOneTurn();
-	private JudgeOfTwoTurnHurt jotth = new JudgeOfTwoTurnHurt();
+	private GameInfo gi;
+	private Behavior behavior;
+	private double[] score;
+	private ActionFilter filter;
+	private AttackInOneTurn aiot;
+	private JudgeOfTwoTurnHurt jotth;
+	
+	public Counter(GameInfo info) {
+		gi = info;
+		behavior = new Behavior(gi.getSamuraiInfo()[gi.getWeapon()].getHidden());
+		score = new double[behavior.behaviors.size()];
+		filter = new ActionFilter(gi);
+		aiot = new AttackInOneTurn(info);
+		jotth = new JudgeOfTwoTurnHurt(info);
+	}
 
 	/**
 	 * Test all possible actions and get their scores.
@@ -16,16 +25,16 @@ public class Counter {
 			if (filter.canAttack(gi.getWeapon()).contains(behavior.getBehavior(index))) {
 				score[index] += 10;
 			}
-			if (filter.avoidEnemyField(gi.getWeapon(), 3).contains(behavior.getBehavior(index))) {
-				score[index] += gi.getWeapon() * 0.5;
-			}
-			if (gi.getWeapon() == 2
-					&& filter.avoidEnemyField(gi.getWeapon(), 4).contains(behavior.getBehavior(index))) {
-				score[index] += 0.5;
-			}
-			if (filter.chaseSameEnemy(gi.getWeapon(), 5).contains(behavior.getBehavior(index))) {
-				score[index] += (2 - gi.getWeapon()) * 0.5;
-			}
+//			if (filter.avoidEnemyField(gi.getWeapon(), 3).contains(behavior.getBehavior(index))) {
+//				score[index] += gi.getWeapon() * 0.5;
+//			}
+//			if (gi.getWeapon() == 2
+//					&& filter.avoidEnemyField(gi.getWeapon(), 4).contains(behavior.getBehavior(index))) {
+//				score[index] += 0.5;
+//			}
+//			if (filter.chaseSameEnemy(gi.getWeapon(), 5).contains(behavior.getBehavior(index))) {
+//				score[index] += (2 - gi.getWeapon()) * 0.5;
+//			}
 			if (gi.getWeapon() == 0 && filter.chaseSameEnemy(gi.getWeapon(), 4).contains(behavior.getBehavior(index))) {
 				score[index] += 0.5;
 			}

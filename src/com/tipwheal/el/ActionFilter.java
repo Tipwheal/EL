@@ -9,15 +9,16 @@ import java.util.ArrayList;
  *
  */
 public class ActionFilter {
-	private UsefulInfo ui = new UsefulInfo();
-	private Behavior behavior = new Behavior(ui.getSamuraiInfo(ui.getWeapon()).getHidden());
-	private int[][] field;
+	private GameInfo gi;
+	private UsefulInfo ui;
+	private Behavior behavior;
+	private int[][] field = new int[15][15];
 	private int[] curLocation;
-
-	/**
-	 * Constructs an <tt>AnctionFilter</tt>.
-	 */
-	public ActionFilter() {
+	
+	public ActionFilter(GameInfo info) {
+		gi = info;
+		ui = new UsefulInfo(gi);
+		behavior = new Behavior(ui.getSamuraiInfo(ui.getWeapon()).getHidden());
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
 				field[i][j] = field[i][j];
@@ -104,7 +105,6 @@ public class ActionFilter {
 	 * @return A list of action strings.
 	 */
 	public ArrayList<String> avoidEnemyField(int yourself, int enemy) {
-		UsefulInfo ui = new UsefulInfo();
 		ui.getOccupiedCells(enemy);
 		ArrayList<String> result = new ArrayList<>();
 		int[] curLocYourself = ui.getSamuraiLocation(yourself);
@@ -140,7 +140,6 @@ public class ActionFilter {
 	 * @return A list of action strings.
 	 */
 	public ArrayList<String> chaseSameEnemy(int yourself, int enemy) {
-		UsefulInfo ui = new UsefulInfo();
 		ui.getOccupiedCells(enemy);
 		ArrayList<String> result = new ArrayList<>();
 		int[] curLocYourself = ui.getSamuraiLocation(yourself);
@@ -293,8 +292,7 @@ public class ActionFilter {
 	 * 
 	 * @return A list of action strings.
 	 */
-	public static ArrayList<String> localOccupy() {
-		UsefulInfo ui = new UsefulInfo();
+	public ArrayList<String> localOccupy() {
 		Behavior behavior = new Behavior(ui.getSamuraiInfo(ui.getWeapon()).getHidden());
 		String[] num = new String[behavior.getBehaviors().size()];
 		int n1, n2, n3, n4;

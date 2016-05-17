@@ -223,9 +223,11 @@ public class AttackInOneTurn {
 	}
 
 	/**
+	 * Get actions after doing which you will get far from enemy attack area.
 	 * 
 	 * @param yourself
-	 * @return
+	 *            The samurai ID of yourself.
+	 * @return A list of action strings.
 	 */
 	public ArrayList<String> getFarFromEnemyAtkArea(int yourself) {
 		ArrayList<String> result = new ArrayList<>();
@@ -262,9 +264,56 @@ public class AttackInOneTurn {
 	}
 
 	/**
+	 * Get actions that you can get far from a specific enemy after doiong the
+	 * actions.
 	 * 
 	 * @param yourself
-	 * @return
+	 *            The weapon id of yourself.
+	 * @param enemy
+	 *            The weapon id of enemy.
+	 * @return A list of action strings.
+	 */
+	public ArrayList<String> getFarFromEnemyAtkArea(int yourself, int enemy) {
+		ArrayList<String> result = new ArrayList<>();
+		if (info.getSamuraiLocation(enemy) == null) {
+			return null;
+		}
+		OccupyArea area = new OccupyArea(info.getSamuraiLocation(yourself), yourself);
+		boolean in = false;
+		for (int[] loc : area.Manhattan(info.getSamuraiLocation(yourself), 5)) {
+			for (int[] loc1 : posAtkOneTurn(info.getSamuraiLocation(enemy), enemy)) {
+				if (loc[0] == loc1[0] && loc[1] == loc1[1]) {
+					in = true;
+					break;
+				}
+			}
+			if (in) {
+				break;
+			}
+		}
+		if (in) {
+			int[] yourLoc = info.getSamuraiLocation(yourself);
+			int[] enemyLoc = info.getSamuraiLocation(enemy);
+			int distence = Math.abs(yourLoc[0] - enemyLoc[0]) + Math.abs(yourLoc[1] - enemyLoc[1]);
+			for (String action : behavior.getBehaviors()) {
+				int[] nextLoc = filter.getNextLocation(action, yourLoc);
+				if (Math.abs(nextLoc[0] - enemyLoc[0]) + Math.abs(nextLoc[1] - enemyLoc[1]) > distence
+						&& !posAtkOneTurn(enemyLoc, enemy).contains(nextLoc)) {
+					if (!result.contains(action)) {
+						result.add(action);
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Get actions after doing which you will get close to enemy attack area.
+	 * 
+	 * @param yourself
+	 *            The samurai ID of yourself.
+	 * @return A list of action strings.
 	 */
 	public ArrayList<String> getCloseToEnemyAtkArea(int yourself) {
 		ArrayList<String> result = new ArrayList<>();
@@ -293,6 +342,51 @@ public class AttackInOneTurn {
 						if (!result.contains(action)) {
 							result.add(action);
 						}
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Get actions that you can get close to a specific enemy after doiong the
+	 * actions.
+	 * 
+	 * @param yourself
+	 *            The weapon id of yourself.
+	 * @param enemy
+	 *            The weapon id of enemy.
+	 * @return A list of action strings.
+	 */
+	public ArrayList<String> getCloseToEnemyAtkArea(int yourself, int enemy) {
+		ArrayList<String> result = new ArrayList<>();
+		if (info.getSamuraiLocation(enemy) == null) {
+			return null;
+		}
+		OccupyArea area = new OccupyArea(info.getSamuraiLocation(yourself), yourself);
+		boolean in = false;
+		for (int[] loc : area.Manhattan(info.getSamuraiLocation(yourself), 5)) {
+			for (int[] loc1 : posAtkOneTurn(info.getSamuraiLocation(enemy), enemy)) {
+				if (loc[0] == loc1[0] && loc[1] == loc1[1]) {
+					in = true;
+					break;
+				}
+			}
+			if (in) {
+				break;
+			}
+		}
+		if (in) {
+			int[] yourLoc = info.getSamuraiLocation(yourself);
+			int[] enemyLoc = info.getSamuraiLocation(enemy);
+			int distence = Math.abs(yourLoc[0] - enemyLoc[0]) + Math.abs(yourLoc[1] - enemyLoc[1]);
+			for (String action : behavior.getBehaviors()) {
+				int[] nextLoc = filter.getNextLocation(action, yourLoc);
+				if (Math.abs(nextLoc[0] - enemyLoc[0]) + Math.abs(nextLoc[1] - enemyLoc[1]) < distence
+						&& !posAtkOneTurn(enemyLoc, enemy).contains(nextLoc)) {
+					if (!result.contains(action)) {
+						result.add(action);
 					}
 				}
 			}

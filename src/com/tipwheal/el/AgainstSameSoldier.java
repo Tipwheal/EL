@@ -3,11 +3,7 @@ package com.tipwheal.el;
 import java.util.ArrayList;
 
 public class AgainstSameSoldier {
-	/**
-	 * ����ͬ����ʿԭ��ռ�� ����һ������move����Ϊlist
-	 * 
-	 * @return
-	 */
+
 	public static ArrayList<String> localOccupy() {
 		Behavior beh = new Behavior(0);
 		String[] num = new String[beh.behaviors.size()];
@@ -34,15 +30,6 @@ public class AgainstSameSoldier {
 		return behaviors;
 	}
 
-	/**
-	 * 
-	 * @param x�ҷ���ʿ������
-	 * @param y�ҷ���ʿ������
-	 * @param curX�з���ʿ������
-	 * @param curY�з���ʿ������
-	 *            ��׷���з�ְͬҵ��ʿ���ɸ÷�������һ����Ϊ��list�������ּ�Ȩ
-	 * @return
-	 */
 	public static ArrayList<String> chastSameSoldier(int x, int y, int curX, int curY) {
 		Behavior beh = new Behavior(0);
 		ArrayList<String> behaviors = new ArrayList<String>();
@@ -78,15 +65,6 @@ public class AgainstSameSoldier {
 		return behaviors;
 	}
 
-	/**
-	 * 
-	 * @param x�ҷ���ʿ������
-	 * @param y�ҷ���ʿ������
-	 * @param curX�з���ʿ������
-	 * @param curY�з���ʿ������
-	 *            ����ܵз�ְͬҵ��ʿ���ɸ÷�������һ����Ϊ��list�����ӷּ�Ȩ
-	 * @return
-	 */
 	public static ArrayList<String> evadeSameSoldier(int x, int y, int curX, int curY) {
 		Behavior beh = new Behavior(0);
 		ArrayList<String> behaviors = new ArrayList<String>();

@@ -67,8 +67,7 @@ public class ActionFilter {
 	}
 
 	/**
-	 * 规避敌方特定武士（规避1）<br>
-	 * Get behaviors that you can avoid an specific enemy if you do them. by杨子航
+	 * Get behaviors that you can avoid an specific enemy if you do them.
 	 * 
 	 * @param yourself
 	 *            The samurai ID to avoid enemy.
@@ -96,8 +95,7 @@ public class ActionFilter {
 	}
 
 	/**
-	 * 规避敌方区域（规避2） <br>
-	 * Get behaviors that you can avoid an specific enemy if you do them. by朱晨乾
+	 * Get behaviors that you can avoid an specific enemy if you do them.
 	 * 
 	 * @param yourself
 	 *            The samurai ID to avoid enemy.
@@ -133,9 +131,7 @@ public class ActionFilter {
 	}
 
 	/**
-	 * 需要改
-	 * 追杀敌方武士减分加权的筛选行为list Get behaviors that you can avoid an specific enemy if
-	 * you do them. by朱晨乾
+	 * list Get behaviors that you can avoid an specific enemy if you do them.
 	 * 
 	 * @param yourself
 	 *            The samurai ID to avoid enemy.
@@ -291,9 +287,11 @@ public class ActionFilter {
 	}
 
 	/**
-	 * 对峙同类武士原地占领 返回一个不用move的行为list by朱晨乾
+	 * Occupy cells without move.
 	 * 
-	 * @return
+	 * @author Zcq.
+	 * 
+	 * @return A list of action strings.
 	 */
 	public static ArrayList<String> localOccupy() {
 		UsefulInfo ui = new UsefulInfo();

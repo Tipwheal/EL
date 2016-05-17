@@ -1,8 +1,5 @@
 package com.tipwheal.el;
 
-/**
- * Copied from万霄on 2016/5/12.
- */
 import java.util.ArrayList;
 
 public class Sword {

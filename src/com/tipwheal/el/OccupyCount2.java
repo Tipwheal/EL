@@ -2,9 +2,6 @@ package com.tipwheal.el;
 
 import java.util.ArrayList;
 
-/**
- * Created by 李雨倩on 2016/5/15.
- */
 public class OccupyCount2 {
 	private int[] myLocation = new int[2];
 	private int ID;
@@ -128,15 +125,6 @@ public class OccupyCount2 {
 		return occupy;
 	}
 
-	/**
-	 * 计算出我方武士每个人占领了多少格子 计算出能看到的敌方武士每个人占领了多少格子
-	 *
-	 * @param boardSeen
-	 *            能看见的战场
-	 * @return 一个int[]型数组，名称是score[]。
-	 *         score[0]存储的是0号武士占领的格子数，score[1]存储的是1号武士占领的格子数；（到score[5]皆同）
-	 *         score[6]存储的是没有被任何一方占领的格子数 score[7]存储的是未知的格子数
-	 */
 	public int[] occupyCount(int[][] boardSeen) {
 		int[] score = { 0, 0, 0, 0, 0, 0, 0, 0 };
 		for (int i = 0; i < 15; i++) {

@@ -232,7 +232,7 @@ public class AttackInOneTurn {
 	public ArrayList<String> getFarFromEnemyAtkArea(int yourself) {
 		ArrayList<String> result = new ArrayList<>();
 		OccupyArea area = new OccupyArea(info.getSamuraiLocation(yourself), yourself);
-		for (int[] loc : area.Manhattan(info.getSamuraiLocation(yourself), 5)) {
+		for (int[] loc : area.manhattan(info.getSamuraiLocation(yourself), 5)) {
 			ArrayList<Integer> enemies = new ArrayList<>();
 			for (int i = 3; i < 6; i++) {
 				if (info.getSamuraiLocation(i) == null) {
@@ -280,7 +280,7 @@ public class AttackInOneTurn {
 		}
 		OccupyArea area = new OccupyArea(info.getSamuraiLocation(yourself), yourself);
 		boolean in = false;
-		for (int[] loc : area.Manhattan(info.getSamuraiLocation(yourself), 5)) {
+		for (int[] loc : area.manhattan(info.getSamuraiLocation(yourself), 5)) {
 			for (int[] loc1 : posAtkOneTurn(info.getSamuraiLocation(enemy), enemy)) {
 				if (loc[0] == loc1[0] && loc[1] == loc1[1]) {
 					in = true;
@@ -318,7 +318,7 @@ public class AttackInOneTurn {
 	public ArrayList<String> getCloseToEnemyAtkArea(int yourself) {
 		ArrayList<String> result = new ArrayList<>();
 		OccupyArea area = new OccupyArea(info.getSamuraiLocation(yourself), yourself);
-		for (int[] loc : area.Manhattan(info.getSamuraiLocation(yourself), 5)) {
+		for (int[] loc : area.manhattan(info.getSamuraiLocation(yourself), 5)) {
 			ArrayList<Integer> enemies = new ArrayList<>();
 			for (int i = 3; i < 6; i++) {
 				if (info.getSamuraiLocation(i) == null) {
@@ -366,7 +366,7 @@ public class AttackInOneTurn {
 		}
 		OccupyArea area = new OccupyArea(info.getSamuraiLocation(yourself), yourself);
 		boolean in = false;
-		for (int[] loc : area.Manhattan(info.getSamuraiLocation(yourself), 5)) {
+		for (int[] loc : area.manhattan(info.getSamuraiLocation(yourself), 5)) {
 			for (int[] loc1 : posAtkOneTurn(info.getSamuraiLocation(enemy), enemy)) {
 				if (loc[0] == loc1[0] && loc[1] == loc1[1]) {
 					in = true;

@@ -12,16 +12,22 @@ public class GreedyPlayer extends Player {
 	}
 
 	public GameInfo play(GameInfo info) {
-//		Counter counter = new Counter();
-//		int i = -1;
-//		double max;
-//		for(int j = 0;j<counter.getScore().length;j++) {
-//			if(score>max) {
-//				i = j;
-//				max = score;
-//			}
-//		}
-//		
+		Counter counter = new Counter();
+		int i = -1;
+		double max = -1;
+		double[] score = counter.getScore();
+		for (int j = 0; j < score.length; j++) {
+			if (score[j] > max) {
+				i = j;
+				max = score[j];
+			}
+		}
+		String[] actions = counter.getBehavior().behaviors.get(i).split(" ");
+		for (String action : actions) {
+			if (action != null) {
+				info.doAction(Integer.parseInt(action));
+			}
+		}
 		return new GameInfo(info);
 	}
 

@@ -9,9 +9,17 @@ import java.util.ArrayList;
  *
  */
 public class AttackInOneTurn {
-	private UsefulInfo info = new UsefulInfo();
-	private Behavior behavior = new Behavior(info.getSamuraiInfo(info.getWeapon()).getHidden());
-	private ActionFilter filter = new ActionFilter();
+	private GameInfo gi;
+	private UsefulInfo info;
+	private Behavior behavior;
+	private ActionFilter filter;
+	
+	public AttackInOneTurn(GameInfo info) {
+		gi = info;
+		this.info = new UsefulInfo(gi);
+		behavior = new Behavior(this.info.getSamuraiInfo(this.info.getWeapon()).getHidden());
+		filter = new ActionFilter(gi);
+	}
 
 	/**
 	 * Get possible locations a samurai can reach if it occupy some cells in

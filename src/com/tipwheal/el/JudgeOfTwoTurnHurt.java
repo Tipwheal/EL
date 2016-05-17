@@ -3,12 +3,16 @@ package com.tipwheal.el;
 import java.util.ArrayList;
 
 public class JudgeOfTwoTurnHurt {
-	private GameInfo info = new GameInfo();
+	private GameInfo info;
 	private Behavior behavior;
 	private OccupyArea area;
 	private int weapon;
 	private int[] myLocation = new int[2];
 	private int[] enemyLoca = new int[2];
+	
+	public JudgeOfTwoTurnHurt(GameInfo info) {
+		this.info = info; 
+	}
 
 	/**
 	 * Get actions that your samurai can attack enemy in two turns.

@@ -8,14 +8,41 @@ public class OccupyCount2 {
 	private int[][] board;
 	private ArrayList<int[]> countOccupyCells = new ArrayList<>();
 	private GameInfo gi;
-	private UsefulInfo usefulInfo;
+	private UsefulInfo ui;
+	private ActionFilter filter;
 	private Spear spear = new Spear();
 	private Sword sword = new Sword();
 	private Ax ax = new Ax();
 	
 	public OccupyCount2(GameInfo info) {
 		gi = info;
-		usefulInfo = new UsefulInfo(gi);
+		ui = new UsefulInfo(gi);
+		filter  =new ActionFilter(gi);
+	}
+	
+	public int getOcpNum(String action,int yourself) {
+		System.err.println("in OccupyCount2:");
+		System.err.println("in getOcpNum:");
+		int num = 0;
+		int[] yourLoc = ui.getSamuraiLocation(yourself);
+		System.err.println("Your current location: " + yourLoc[0] +" "+ yourLoc[1]);
+		System.err.println("and the state: " +ui.getField()[yourLoc[1]][yourLoc[0]]);
+		ArrayList<int[]> locs = filter.getNextOccupiedLocation(action, yourLoc,yourself);
+		for(int[] loc:locs) {
+			switch(ui.getField()[loc[1]][loc[0]]) {
+			case 8:
+				num += 1;
+				break;
+			case 3:
+			case 4:
+			case 5:
+				num += 2;
+				break;
+			default:
+				break;
+			}
+		}
+		return num;
 	}
 
 	public ArrayList<int[]> getCountOccupyCells() {
@@ -26,7 +53,7 @@ public class OccupyCount2 {
 		myLocation = l;
 		ID = id % 3;
 		board = new int[15][15];
-		board = usefulInfo.getField();
+		board = ui.getField();
 	}
 
 	private int isHide = 0;

@@ -84,7 +84,11 @@ public class UsefulInfo {
 	 * @return A list of cells that's occupied by this occupy action.
 	 */
 	public ArrayList<int[]> getOccupiedCells(int direction, int[] curLoc, int weapon) {
-		int[] location = curLoc;
+		System.err.println("now in ui getocycells:");
+		System.err.println("and current loc "+curLoc[0] +" "+curLoc[1]);
+		int[] location = new int[2];
+		location[0] = curLoc[0];
+		location[1] = curLoc[1];
 		ArrayList<int[]> list = new ArrayList<>();
 		if (location[0] == -1) {
 			return null;
@@ -94,9 +98,11 @@ public class UsefulInfo {
 			int[][] possibleY = { { 1, 2, 3, 4 }, { 1, 2, 0, 1, 0 }, { -1, 0, 1, 1, 1, -1, 0 } };
 			for (int i = 0; i < size[weapon % 3]; i++) {
 				int[] tmp = new int[2];
+				tmp[0] = possibleX[weapon % 3][i];
+				tmp[1] = possibleY[weapon % 3][i];
+				tmp = info.rotate(direction, tmp[0], tmp[1]);
 				tmp[0] = location[0] + possibleX[weapon % 3][i];
 				tmp[1] = location[1] + possibleY[weapon % 3][i];
-				tmp = info.rotate(direction, tmp[0], tmp[1]);
 				if (tmp[0] >= 0 && tmp[0] <= 14 && tmp[1] >= 0 && tmp[1] <= 14) {
 					if (!list.contains(tmp)) {
 						list.add(tmp);

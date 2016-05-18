@@ -14,7 +14,7 @@ public class ActionFilter {
 	private Behavior behavior;
 	private int[][] field = new int[15][15];
 	private int[] curLocation;
-	
+
 	public ActionFilter(GameInfo info) {
 		gi = info;
 		ui = new UsefulInfo(gi);
@@ -67,6 +67,21 @@ public class ActionFilter {
 		return result;
 	}
 
+	public boolean canAtk(String action, int yourself) {
+		for (int i = 3; i < 6; i++) {
+			int[] enemyLoc = ui.getSamuraiLocation(i);
+			if(enemyLoc != null) {
+				ArrayList<int[]> occupied = getNextOccupiedLocation(action, ui.getSamuraiLocation(yourself), yourself);
+				for(int j = 0;j<occupied.size();j++) {
+					if(occupied.get(j)[0] == enemyLoc[0]&&occupied.get(j)[1] == enemyLoc[1]) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * Get behaviors that you can avoid an specific enemy if you do them.
 	 * 
@@ -111,7 +126,7 @@ public class ActionFilter {
 		int[] locEnemy = ui.getSamuraiLocation(enemy);
 		int curDistance = 0;
 		int finalDistance = 0;
-		if (locEnemy[0] == -1) {
+		if (locEnemy == null) {
 			return null;
 		}
 		for (int[] loc : ui.getOccupiedCells(enemy)) {
@@ -130,8 +145,23 @@ public class ActionFilter {
 		return result;
 	}
 
+	public boolean avoidField(String action, int yourself, int enemy) {
+		int[] yourLoc = ui.getSamuraiLocation(yourself);
+		int[] enemyLoc = ui.getSamuraiLocation(enemy);
+		if (enemyLoc == null) {
+			return false;
+		}
+		int distence = Math.abs(yourLoc[0] - enemyLoc[0]) + Math.abs(yourLoc[1] - enemyLoc[1]);
+		int[] finalLoc = this.getNextLocation(action, yourLoc);
+		int finalDistence = Math.abs(finalLoc[0] - enemyLoc[0]) + Math.abs(finalLoc[1] - enemyLoc[1]);
+		if (finalDistence > distence) {
+			return true;
+		}
+		return false;
+	}
+
 	/**
-	 * list Get behaviors that you can avoid an specific enemy if you do them.
+	 * Get behaviors that you can avoid an specific enemy if you do them.
 	 * 
 	 * @param yourself
 	 *            The samurai ID to avoid enemy.
@@ -242,39 +272,77 @@ public class ActionFilter {
 	 * @return
 	 */
 	public ArrayList<int[]> getNextOccupiedLocation(String actionLine, int[] curLoc, int weapon) {
-		String[] actions = actionLine.split(actionLine);
-		int[] location = curLoc;
+		String[] actions = actionLine.split(" ");
+		System.err.println("getNextOccupiedLocation:Actions:");
+		for(String s:actions) {
+			System.err.print(s + " ");
+		}
+		System.err.println();
+		int[] location = new int[2];
+		location[0] = curLoc[0];
+		location[1] = curLoc[1];
 		ArrayList<int[]> occupied = new ArrayList<>();
 		for (String s : actions) {
 			int action = Integer.parseInt(s);
+			System.err.println("now action: "+action);
 			switch (action) {
-			case 1:
+			case 5:
 				if (location[1] < 14) {
 					location[1]++;
 				}
 				break;
-			case 2:
+			case 6:
 				if (location[0] < 14) {
 					location[0]++;
 				}
 				break;
-			case 3:
+			case 7:
 				if (location[1] > 0) {
 					location[1]--;
 				}
 				break;
-			case 4:
+			case 8:
 				if (location[0] > 0) {
 					location[0]--;
 				}
 				break;
-			case 5:
-			case 6:
-			case 7:
-			case 8:
-				for (int[] loc : ui.getOccupiedCells(action - 5, location, weapon)) {
+			case 1:
+				for (int[] loc : ui.getOccupiedCells(0, location, weapon)) {
+					System.err.println("in5678: " + action);
 					if (!occupied.contains(loc)) {
 						occupied.add(loc);
+						System.err.println("loc added in 5678: " + loc[0] + " " + loc[1]);
+						System.err.println("and the state: " + ui.getField()[loc[1]][loc[0]]);
+					}
+				}
+				break;
+			case 2:
+				for (int[] loc : ui.getOccupiedCells(1, location, weapon)) {
+					System.err.println("in5678: " + action);
+					if (!occupied.contains(loc)) {
+						occupied.add(loc);
+						System.err.println("loc added in 5678: " + loc[0] + " " + loc[1]);
+						System.err.println("and the state: " + ui.getField()[loc[1]][loc[0]]);
+					}
+				}
+				break;
+			case 3:
+				for (int[] loc : ui.getOccupiedCells(2, location, weapon)) {
+					System.err.println("in5678: " + action);
+					if (!occupied.contains(loc)) {
+						occupied.add(loc);
+						System.err.println("loc added in 5678: " + loc[0] + " " + loc[1]);
+						System.err.println("and the state: " + ui.getField()[loc[1]][loc[0]]);
+					}
+				}
+				break;
+			case 4:
+				for (int[] loc : ui.getOccupiedCells(3, location, weapon)) {
+					System.err.println("in5678: " + action);
+					if (!occupied.contains(loc)) {
+						occupied.add(loc);
+						System.err.println("loc added in 5678: " + loc[0] + " " + loc[1]);
+						System.err.println("and the state: " + ui.getField()[loc[1]][loc[0]]);
 					}
 				}
 				break;

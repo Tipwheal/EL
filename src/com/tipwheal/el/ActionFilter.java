@@ -273,18 +273,12 @@ public class ActionFilter {
 	 */
 	public ArrayList<int[]> getNextOccupiedLocation(String actionLine, int[] curLoc, int weapon) {
 		String[] actions = actionLine.split(" ");
-		System.err.println("getNextOccupiedLocation:Actions:");
-		for (String s : actions) {
-			System.err.print(s + " ");
-		}
-		System.err.println();
 		int[] location = new int[2];
 		location[0] = curLoc[0];
 		location[1] = curLoc[1];
 		ArrayList<int[]> occupied = new ArrayList<>();
 		for (String s : actions) {
 			int action = Integer.parseInt(s);
-			System.err.println("now action: " + action);
 			switch (action) {
 			case 5:
 				if (location[1] < 14) {
@@ -308,41 +302,29 @@ public class ActionFilter {
 				break;
 			case 1:
 				for (int[] loc : ui.getOccupiedCells(0, location, weapon)) {
-					System.err.println("in5678: " + action);
 					if (!occupied.contains(loc)) {
 						occupied.add(loc);
-						System.err.println("loc added in 5678: " + loc[0] + " " + loc[1]);
-						System.err.println("and the state: " + ui.getField()[loc[1]][loc[0]]);
 					}
 				}
 				break;
 			case 2:
 				for (int[] loc : ui.getOccupiedCells(1, location, weapon)) {
-					System.err.println("in5678: " + action);
 					if (!occupied.contains(loc)) {
 						occupied.add(loc);
-						System.err.println("loc added in 5678: " + loc[0] + " " + loc[1]);
-						System.err.println("and the state: " + ui.getField()[loc[1]][loc[0]]);
 					}
 				}
 				break;
 			case 3:
 				for (int[] loc : ui.getOccupiedCells(2, location, weapon)) {
-					System.err.println("in5678: " + action);
 					if (!occupied.contains(loc)) {
 						occupied.add(loc);
-						System.err.println("loc added in 5678: " + loc[0] + " " + loc[1]);
-						System.err.println("and the state: " + ui.getField()[loc[1]][loc[0]]);
 					}
 				}
 				break;
 			case 4:
 				for (int[] loc : ui.getOccupiedCells(3, location, weapon)) {
-					System.err.println("in5678: " + action);
 					if (!occupied.contains(loc)) {
 						occupied.add(loc);
-						System.err.println("loc added in 5678: " + loc[0] + " " + loc[1]);
-						System.err.println("and the state: " + ui.getField()[loc[1]][loc[0]]);
 					}
 				}
 				break;

@@ -100,4 +100,6 @@ public class JudgeOfTwoTurnHurt {
 		}
 		return list;
 	}
+	
+	
 }

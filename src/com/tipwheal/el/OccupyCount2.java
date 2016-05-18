@@ -13,33 +13,49 @@ public class OccupyCount2 {
 	private Spear spear = new Spear();
 	private Sword sword = new Sword();
 	private Ax ax = new Ax();
-	
+
 	public OccupyCount2(GameInfo info) {
 		gi = info;
 		ui = new UsefulInfo(gi);
-		filter  =new ActionFilter(gi);
+		filter = new ActionFilter(gi);
 	}
-	
-	public int getOcpNum(String action,int yourself) {
-		System.err.println("in OccupyCount2:");
-		System.err.println("in getOcpNum:");
-		int num = 0;
+
+	public double getOcpNum(String action, int yourself) {
+		double num = 0;
 		int[] yourLoc = ui.getSamuraiLocation(yourself);
-		System.err.println("Your current location: " + yourLoc[0] +" "+ yourLoc[1]);
-		System.err.println("and the state: " +ui.getField()[yourLoc[1]][yourLoc[0]]);
-		ArrayList<int[]> locs = filter.getNextOccupiedLocation(action, yourLoc,yourself);
-		for(int[] loc:locs) {
-			switch(ui.getField()[loc[1]][loc[0]]) {
-			case 8:
-				num += 1;
-				break;
-			case 3:
-			case 4:
-			case 5:
-				num += 2;
-				break;
-			default:
-				break;
+		System.err.println("Your current location: " + yourLoc[0] + " " + yourLoc[1]);
+		System.err.println("and the state: " + ui.getField()[yourLoc[1]][yourLoc[0]]);
+		ArrayList<int[]> locs = filter.getNextOccupiedLocation(action, yourLoc, yourself);
+		for (int[] loc : locs) {
+//			if ((loc[0] == 0 && loc[1] == 5) || (loc[0] == 0 && loc[1] == 14) || (loc[0] == 9 && loc[1] == 14)
+//					|| (loc[0] == 14 && loc[1] == 9) || (loc[0] == 14 && loc[1] == 0) || (loc[0] == 5 && loc[1] == 0)) {
+//				break;
+//			}
+			int state = ui.getField()[loc[1]][loc[0]];
+			if (gi.getSide() == 1) {
+				if (state == 8) {
+					num += 1;
+				}
+				if (state >= 3 && state <= 5) {
+					num += 1.3;
+				}
+				if (state >=0 && state <= 2) {
+					num += 0.3;
+				}
+			} else {
+				if (state == 8) {
+					num += 1;
+				}
+				if (state >= 0 && state <= 2) {
+					num += 2;
+				}
+			}
+			for(int i = 3;i<6;i++) {
+				int enemyX = gi.getSamuraiInfo()[i].getCurX();
+				int enemyY = gi.getSamuraiInfo()[i].getCurY();
+				if((enemyX == loc[0]&&enemyY == loc[1])&&(enemyX!=gi.getSamuraiInfo()[i].getHomeX()&&enemyY!=gi.getSamuraiInfo()[i].getHomeY())) {
+					num += 10;
+				}
 			}
 		}
 		return num;

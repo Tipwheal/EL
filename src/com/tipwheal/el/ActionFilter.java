@@ -70,10 +70,10 @@ public class ActionFilter {
 	public boolean canAtk(String action, int yourself) {
 		for (int i = 3; i < 6; i++) {
 			int[] enemyLoc = ui.getSamuraiLocation(i);
-			if(enemyLoc != null) {
+			if (enemyLoc != null) {
 				ArrayList<int[]> occupied = getNextOccupiedLocation(action, ui.getSamuraiLocation(yourself), yourself);
-				for(int j = 0;j<occupied.size();j++) {
-					if(occupied.get(j)[0] == enemyLoc[0]&&occupied.get(j)[1] == enemyLoc[1]) {
+				for (int j = 0; j < occupied.size(); j++) {
+					if (occupied.get(j)[0] == enemyLoc[0] && occupied.get(j)[1] == enemyLoc[1]) {
 						return true;
 					}
 				}
@@ -148,7 +148,7 @@ public class ActionFilter {
 	public boolean avoidField(String action, int yourself, int enemy) {
 		int[] yourLoc = ui.getSamuraiLocation(yourself);
 		int[] enemyLoc = ui.getSamuraiLocation(enemy);
-		if (enemyLoc == null) {
+		if (enemyLoc[0] == -1) {
 			return false;
 		}
 		int distence = Math.abs(yourLoc[0] - enemyLoc[0]) + Math.abs(yourLoc[1] - enemyLoc[1]);
@@ -274,7 +274,7 @@ public class ActionFilter {
 	public ArrayList<int[]> getNextOccupiedLocation(String actionLine, int[] curLoc, int weapon) {
 		String[] actions = actionLine.split(" ");
 		System.err.println("getNextOccupiedLocation:Actions:");
-		for(String s:actions) {
+		for (String s : actions) {
 			System.err.print(s + " ");
 		}
 		System.err.println();
@@ -284,7 +284,7 @@ public class ActionFilter {
 		ArrayList<int[]> occupied = new ArrayList<>();
 		for (String s : actions) {
 			int action = Integer.parseInt(s);
-			System.err.println("now action: "+action);
+			System.err.println("now action: " + action);
 			switch (action) {
 			case 5:
 				if (location[1] < 14) {

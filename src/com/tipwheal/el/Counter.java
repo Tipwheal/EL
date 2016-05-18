@@ -31,10 +31,11 @@ public class Counter {
 				System.err.println("+10");
 			}
 			if(filter.avoidField(action, gi.getWeapon(), 3)) {
-				score[index] += gi.getWeapon() * 0.5;
+				System.err.println("avoidavoidavoidavoidavoidavoidavoidavoidavoidavoid");
+				score[index] += gi.getWeapon() * 10;
 			}
 			if(gi.getWeapon() == 2&&filter.avoidField(action, gi.getWeapon(), 4)) {
-				score[index] += 0.5;
+				score[index] += 10;
 			}
 //			if (filter.chaseSameEnemy(gi.getWeapon(), 5).contains(behavior.getBehavior(index))) {
 //				score[index] += (2 - gi.getWeapon()) * 0.5;

@@ -13,7 +13,7 @@ public class AttackInOneTurn {
 	private UsefulInfo info;
 	private Behavior behavior;
 	private ActionFilter filter;
-	
+
 	public AttackInOneTurn(GameInfo info) {
 		gi = info;
 		this.info = new UsefulInfo(gi);

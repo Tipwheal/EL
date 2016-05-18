@@ -23,14 +23,8 @@ public class OccupyCount2 {
 	public double getOcpNum(String action, int yourself) {
 		double num = 0;
 		int[] yourLoc = ui.getSamuraiLocation(yourself);
-		System.err.println("Your current location: " + yourLoc[0] + " " + yourLoc[1]);
-		System.err.println("and the state: " + ui.getField()[yourLoc[1]][yourLoc[0]]);
 		ArrayList<int[]> locs = filter.getNextOccupiedLocation(action, yourLoc, yourself);
 		for (int[] loc : locs) {
-//			if ((loc[0] == 0 && loc[1] == 5) || (loc[0] == 0 && loc[1] == 14) || (loc[0] == 9 && loc[1] == 14)
-//					|| (loc[0] == 14 && loc[1] == 9) || (loc[0] == 14 && loc[1] == 0) || (loc[0] == 5 && loc[1] == 0)) {
-//				break;
-//			}
 			int state = ui.getField()[loc[1]][loc[0]];
 			if (gi.getSide() == 1) {
 				if (state == 8) {
@@ -39,21 +33,22 @@ public class OccupyCount2 {
 				if (state >= 3 && state <= 5) {
 					num += 1.3;
 				}
-				if (state >=0 && state <= 2) {
+				if (state >= 0 && state <= 2) {
 					num += 0.3;
 				}
 			} else {
 				if (state == 8) {
 					num += 1;
 				}
-				if (state >= 0 && state <= 2) {
+				if (state >= 3 && state <= 5) {
 					num += 2;
 				}
 			}
-			for(int i = 3;i<6;i++) {
+			for (int i = 3; i < 6; i++) {
 				int enemyX = gi.getSamuraiInfo()[i].getCurX();
 				int enemyY = gi.getSamuraiInfo()[i].getCurY();
-				if((enemyX == loc[0]&&enemyY == loc[1])&&(enemyX!=gi.getSamuraiInfo()[i].getHomeX()&&enemyY!=gi.getSamuraiInfo()[i].getHomeY())) {
+				if ((enemyX == loc[0] && enemyY == loc[1]) && (enemyX != gi.getSamuraiInfo()[i].getHomeX()
+						&& enemyY != gi.getSamuraiInfo()[i].getHomeY())) {
 					num += 10;
 				}
 			}

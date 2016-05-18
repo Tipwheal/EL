@@ -84,8 +84,6 @@ public class UsefulInfo {
 	 * @return A list of cells that's occupied by this occupy action.
 	 */
 	public ArrayList<int[]> getOccupiedCells(int direction, int[] curLoc, int weapon) {
-		System.err.println("now in ui getocycells:");
-		System.err.println("and current loc "+curLoc[0] +" "+curLoc[1]);
 		int[] location = new int[2];
 		location[0] = curLoc[0];
 		location[1] = curLoc[1];

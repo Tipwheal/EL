@@ -22,6 +22,47 @@ public class GreedyPlayer extends Player {
 				max = score[j];
 			}
 		}
+		if (info.getSide() == 0 && info.getWeapon() == 0) {
+			if (rnd.nextBoolean()) {
+				info.doAction(6);
+				info.doAction(3);
+			} else if (rnd.nextBoolean()) {
+				info.doAction(6);
+				info.doAction(1);
+			} else {
+				info.doAction(8);
+				info.doAction(2);
+			}
+			return info;
+		}
+		if (info.getSide() == 0 && info.getWeapon() == 1) {
+			if (rnd.nextBoolean()) {
+				info.doAction(6);
+				info.doAction(1);
+			} else {
+				info.doAction(7);
+				info.doAction(2);
+			}
+			return info;
+		}
+		if (info.getSide() == 0 && info.getWeapon() == 2) {
+			if (rnd.nextBoolean()) {
+				if (info.getSamuraiInfo()[2].getCurY() == 0) {
+					info.doAction(5);
+					info.doAction(1);
+				}
+				info.doAction(7);
+				info.doAction(3);
+			} else {
+				if (info.getSamuraiInfo()[2].getCurY() == 14) {
+					info.doAction(7);
+					info.doAction(3);
+				}
+				info.doAction(5);
+				info.doAction(1);
+			}
+			return info;
+		}
 		String[] actions = counter.getBehavior().behaviors.get(i).split(" ");
 		for (String action : actions) {
 			if (action != null) {

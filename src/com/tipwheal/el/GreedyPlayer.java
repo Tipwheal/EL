@@ -20,6 +20,7 @@ public class GreedyPlayer extends Player {
 			if (score[j] > max) {
 				i = j;
 				max = score[j];
+//				System.err.println(i + " "+ max);
 			}
 		}
 		String[] actions = counter.getBehavior().behaviors.get(i).split(" ");

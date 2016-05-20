@@ -36,7 +36,26 @@ public class AvdCount {
 	 * @return
 	 */
 	private boolean inAtkArea(String action, int x, int y, int ID, int enemyID, int side) {
-		if (info.getSamuraiInfo()[enemyID].getCurX() == -1) {
+		int enemyX = info.getSamuraiInfo()[enemyID].getCurX();
+		int enemyY = info.getSamuraiInfo()[enemyID].getCurY();
+		return inPosAtkArea(action, x, y, ID, enemyX, enemyY, enemyID, side);
+	}
+
+	/**
+	 * 是否进入某可能位置敌人打击范围。
+	 * 
+	 * @param action
+	 * @param x
+	 * @param y
+	 * @param ID
+	 * @param enemyX
+	 * @param enemyY
+	 * @param enemyID
+	 * @param side
+	 * @return
+	 */
+	private boolean inPosAtkArea(String action, int x, int y, int ID, int enemyX, int enemyY, int enemyID, int side) {
+		if (enemyX == -1) {
 			return false;
 		} else {
 			int[] loc = new int[2];
@@ -46,12 +65,11 @@ public class AvdCount {
 				int d = Integer.parseInt(s);
 				if (d >= 5 && d <= 8) {
 					loc = ActImit.getNextCell(d - 5, loc[0], loc[1]);
-					for (int[] dgr : ActImit.psbAtkArea(info.getSamuraiInfo()[enemyID].getCurX(),
-							info.getSamuraiInfo()[enemyID].getCurY(), enemyID, side)) {
-						if (loc[0] == dgr[0] && loc[1] == dgr[1]) {
-							return true;
-						}
-					}
+				}
+			}
+			for (int[] dgr : ActImit.psbAtkArea(enemyX, enemyY, enemyID, side)) {
+				if (loc[0] == dgr[0] && loc[1] == dgr[1]) {
+					return true;
 				}
 			}
 		}

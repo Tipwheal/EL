@@ -31,6 +31,10 @@ public class ScoreCounter {
 		for (int i = 0; i < lib.getNum(); i++) {
 			String action = lib.getActions(i);
 			scores[i] += ocp.getOcpCounts(lib.getActions(i), x, y, ID, side);
+			if (avd.intoDgrArea(action, x, y, ID, side) && !atk.canAtk(action, x, y, ID, 3, side)
+					&& !atk.canAtk(action, x, y, ID, 4, side) && !atk.canAtk(action, x, y, ID, 5, side)) {
+				scores[i] -= 5;
+			}
 			if (atk.canAtk(action, x, y, ID, 3, side)) {
 				scores[i] += 10;
 			}
@@ -42,9 +46,6 @@ public class ScoreCounter {
 			}
 			if (action.endsWith("9")) {
 				scores[i] += 1;
-			}
-			if (avd.intoDgrArea(action, x, y, ID, side) && !atk.canAtk(action, x, y, ID, 3, side)) {
-				scores[i] -= 5;
 			}
 			if (out.outHome(lib.getActions(i), x, y, 1, side)) {
 				scores[i] += 0.5;

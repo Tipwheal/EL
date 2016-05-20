@@ -34,7 +34,12 @@ public class NewPlayer extends Player {
 		System.err.println("Enemy 5: " + info.getSamuraiInfo()[5].getCurX() + " " + info.getSamuraiInfo()[5].getCurY());
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
-				System.err.print(field[i][j]);
+				int state = field[i][j];
+				if (state == 9) {
+					System.err.print(" ");
+				} else {
+					System.err.print(field[i][j]);
+				}
 				if (j != 14) {
 					System.err.print(" ");
 				} else {

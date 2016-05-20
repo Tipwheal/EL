@@ -6,7 +6,7 @@ package com.tipwheal.el;
 public class Main {
 	public static void main(String[] argv) {
 		GameInfo info = new GameInfo();
-		Player p = new GreedyPlayer();
+		Player p = new NewPlayer();
 
 		while (true) {
 			info.readTurnInfo();

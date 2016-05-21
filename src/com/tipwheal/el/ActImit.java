@@ -26,6 +26,27 @@ public abstract class ActImit {
 	}
 
 	/**
+	 * 得到一串行为后的位置，传入时要确保行为正确。
+	 * 
+	 * @param action
+	 * @param x
+	 * @param y
+	 * @return
+	 */
+	public static int[] getNextCell(String action, int x, int y) {
+		int[] loc = new int[2];
+		loc[0] = x;
+		loc[1] = y;
+		for (String s : action.split(" ")) {
+			int d = Integer.parseInt(s);
+			if (d >= 5 && d <= 8) {
+				loc = ActImit.getNextCell(d - 5, loc[0], loc[1]);
+			}
+		}
+		return loc;
+	}
+
+	/**
 	 * 一次行动占领的所有格子。
 	 * 
 	 * @param dir

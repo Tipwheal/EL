@@ -15,6 +15,7 @@ public class GameInfo {
 	private SamuraiInfo[] samuraiInfo;
 	private int turn, curePeriod;
 	private int[][] field;
+	private MemoryInfo mem = new MemoryInfo();
 
 	/**
 	 * Construct a GameInfo thats the same as parameter.
@@ -350,5 +351,9 @@ public class GameInfo {
 
 	public int[][] getField() {
 		return field;
+	}
+
+	public MemoryInfo getMemory() {
+		return mem;
 	}
 }

@@ -1,5 +1,6 @@
 package com.tipwheal.el;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class ScoreCounter {
@@ -30,26 +31,29 @@ public class ScoreCounter {
 
 		for (int i = 0; i < lib.getNum(); i++) {
 			String action = lib.getActions(i);
+			System.err.print("I can do: " + action);
 			scores[i] += ocp.getOcpCounts(lib.getActions(i), x, y, ID, side);
-			if (avd.intoDgrArea(action, x, y, ID, side) && !atk.canAtk(action, x, y, ID, 3, side)
-					&& !atk.canAtk(action, x, y, ID, 4, side) && !atk.canAtk(action, x, y, ID, 5, side)) {
-				scores[i] -= 5;
+			if (avd.intoDgrArea(action, x, y, ID, side) && !atk.canAtk(action, x, y, ID, side)) {
+				System.err.print ("    He can attck me!");
+				scores[i] -= Strategy.AvdEnemy;
 			}
-			if (atk.canAtk(action, x, y, ID, 3, side)) {
-				scores[i] += 10;
+			if (atk.canAtk(action, x, y, ID, side)) {
+				System.err.println("    I can attack him");
+				scores[i] += Strategy.AtkEnemy;
 			}
-			if (atk.canAtk(action, x, y, ID, 4, side)) {
-				scores[i] += 10;
-			}
-			if (atk.canAtk(action, x, y, ID, 5, side)) {
-				scores[i] += 10;
+			if(avd.intoMemDgrArea(action, x, y, ID, side)) {
+				scores[i] -= Strategy.MemAvd;
 			}
 			if (action.endsWith("9")) {
-				scores[i] += 1;
+				scores[i] += Strategy.Hide;
+				if(avd.intoDgrArea("0", x, y, ID, side)) {
+//					scores[i] += Strategy.Dgr;
+				}
 			}
 			if (out.outHome(lib.getActions(i), x, y, 1, side)) {
-				scores[i] += 0.5;
+				scores[i] += Strategy.OutHome;
 			}
+			System.err.println("    It's score: " + scores[i]);
 		}
 	}
 
@@ -59,19 +63,19 @@ public class ScoreCounter {
 	 * @return
 	 */
 	public String getAction() {
-		double max = 0;
-		int index = 0;
+		double max = -100;
+		ArrayList<String> actions = new ArrayList<>();
 		for (int i = 0; i < scores.length; i++) {
 			if (scores[i] > max) {
 				max = scores[i];
-				index = i;
+				actions.clear();
+				actions.add(lib.getActions(i));
 			} else if (scores[i] == max) {
-				if (rnd.nextBoolean()) {
-					max = scores[i];
-					index = i;
-				}
+				actions.add(lib.getActions(i));
 			}
 		}
-		return lib.getActions(index);
+		int index = rnd.nextInt(actions.size());
+		System.err.println("So i do: " + actions.get(index));
+		return actions.get(index);
 	}
 }

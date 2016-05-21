@@ -1,5 +1,7 @@
 package com.tipwheal.el;
 
+import java.util.ArrayList;
+
 public class ActionCheck {
 	private GameInfo info;
 
@@ -17,9 +19,11 @@ public class ActionCheck {
 	 * @param ID
 	 * @return
 	 */
-	public boolean validAction(String action, int x, int y, int hid, int ID) {
+	public boolean validAction(String action, int x, int y, int hid, int ID, int side) {
 		String[] actions = action.split(" ");
+		ArrayList<int[]> occupied = new ArrayList<>();
 		int[] loc = new int[2];
+		int hidden = hid;
 		loc[0] = x;
 		loc[1] = y;
 		for (String s : actions) {
@@ -32,26 +36,35 @@ public class ActionCheck {
 				if (this.isOthersHome(loc, ID)) {
 					return false;
 				}
-				if (hid == 1 && !isFriendField(loc)) {
+				if (hidden == 1 && !isFriendField(loc)) {
 					return false;
 				}
 			}
 			if (d >= 1 && d <= 4) {
-				if (hid == 1) {
+				if (hidden == 1) {
 					return false;
+				} else {
+					for (int[] locs : ActImit.getNextOcyCells(d - 1, x, y, ID, side)) {
+						if (!occupied.contains(locs)) {
+							occupied.add(locs);
+						}
+					}
 				}
 			}
 			if (d == 9) {
-				if (hid == 1) {
+				if (hidden == 1) {
 					return false;
 				}
-				hid = 1;
+				if (!(isFriendField(loc) || occupied.contains(loc))) {
+					return false;
+				}
+				hidden = 1;
 			}
 			if (d == 10) {
-				if (hid == 0) {
+				if (hidden == 0) {
 					return false;
 				}
-				hid = 0;
+				hidden = 0;
 			}
 		}
 		return true;

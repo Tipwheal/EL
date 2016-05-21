@@ -8,6 +8,25 @@ public class AtkCount {
 	}
 
 	/**
+	 * 能够攻击到敌人。
+	 * 
+	 * @param action
+	 * @param x
+	 * @param y
+	 * @param ID
+	 * @param side
+	 * @return
+	 */
+	public boolean canAtk(String action, int x, int y, int ID, int side) {
+		for (int i = 3; i < 6; i++) {
+			if (this.canAtk(action, x, y, ID, i, side)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * 能够攻击到某个敌人。
 	 * 
 	 * @param action

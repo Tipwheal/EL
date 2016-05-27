@@ -7,7 +7,6 @@ public class NewPlayer extends Player {
 	 * 这是一个开始的方法。
 	 */
 	public GameInfo play(GameInfo info) {
-		print(info);
 		ScoreCounter counter = new ScoreCounter(info);
 		String action = counter.getAction();
 		this.setMemory(info, action);
@@ -62,7 +61,7 @@ public class NewPlayer extends Player {
 					} else {
 						System.err.print(string[i - 10]);
 					}
-					if(j == 14) {
+					if (j == 14) {
 						System.err.println();
 					}
 				}
@@ -75,17 +74,19 @@ public class NewPlayer extends Player {
 
 	public void setMemory(GameInfo info, String action) {
 		int ID = info.getWeapon();
+		MemoryInfo mi = info.getMemory();
 		int[] loc = new int[2];
 		loc[0] = info.getSamuraiInfo()[ID].getCurX();
 		loc[1] = info.getSamuraiInfo()[ID].getCurY();
 		for (int i = 3; i < 6; i++) {
 			if (new AtkCount(info).canAtk(action, loc[0], loc[1], ID, info.getSide())) {
-				info.getMemory().setLastLoc(i, -1, -1);
+				mi.setLastLoc(i, -1, -1);
 			}
 			int x = info.getSamuraiInfo()[i].getCurX();
 			int y = info.getSamuraiInfo()[i].getCurY();
-			info.getMemory().setLastLoc(i, x, y);
+			mi.setLastLoc(i, x, y);
 		}
+		mi.setLastField(info.getField());
 	}
 
 }

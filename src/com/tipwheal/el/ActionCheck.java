@@ -96,6 +96,9 @@ public class ActionCheck {
 	 */
 	private boolean isFriendField(int[] loc) {
 		int[][] field = info.getField();
+		if (isOthersHome(loc, 8)) {
+			return false;
+		}
 		if (field[loc[0]][loc[1]] >= 0 && field[loc[0]][loc[1]] <= 2) {
 			return true;
 		}

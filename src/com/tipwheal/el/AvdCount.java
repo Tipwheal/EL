@@ -1,5 +1,7 @@
 package com.tipwheal.el;
 
+import java.util.ArrayList;
+
 public class AvdCount {
 	private GameInfo info;
 
@@ -117,6 +119,27 @@ public class AvdCount {
 				if (loc[0] == dgr[0] && loc[1] == dgr[1]) {
 					return true;
 				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * 得到上一回合被人占领的格子。
+	 * 
+	 * @param action
+	 * @param x
+	 * @param y
+	 * @param ID
+	 * @param side
+	 * @return
+	 */
+	public boolean inOcpJustLoc(String action, int x, int y, int ID, int side) {
+		int[] loc = ActImit.getNextCell(action, x, y);
+		ArrayList<int[]> changed = info.getMemory().getChangedLoc();
+		for (int[] ch : changed) {
+			if (loc[0] == ch[0] && loc[1] == ch[1]) {
+				return true;
 			}
 		}
 		return false;

@@ -31,4 +31,14 @@ public class OutHomeCount {
 			return false;
 		}
 	}
+
+	public boolean getMid(String action, int x, int y, int ID, int side) {
+		int first = ActImit.getDistence(x, y, 7, 7);
+		int[] loc = ActImit.getNextCell(action, x, y);
+		int last = ActImit.getDistence(loc[0], loc[1], 7, 7);
+		if (last < first) {
+			return true;
+		}
+		return false;
+	}
 }

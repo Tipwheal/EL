@@ -191,4 +191,65 @@ public abstract class ActImit {
 		return result;
 	}
 
+	/**
+	 * 得到可以看见的格子。
+	 * 
+	 * @param x
+	 * @param y
+	 * @param size
+	 * @return
+	 */
+	public static ArrayList<int[]> getManhattan(int x, int y, int size) {
+		ArrayList<int[]> result = new ArrayList<>();
+		int[] loc = { x, y };
+		result.add(loc);
+		for (int dir = 0; dir < 4; dir++) {
+			for (int i = 1; i <= size; i++) {
+				for (int j = 1; j <= i; j++) {
+					loc = ActImit.rotate(dir, j, i - j);
+					loc[0] = loc[0] + x;
+					loc[1] = loc[1] + y;
+					if (loc[0] <= 14 && loc[0] >= 0 && loc[1] <= 14 && loc[1] >= 0) {
+						result.add(loc);
+					}
+				}
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * 得到两点间的距离。
+	 * 
+	 * @param sx
+	 * @param sy
+	 * @param ex
+	 * @param ey
+	 * @return
+	 */
+	public static int getDistence(int sx, int sy, int ex, int ey) {
+		int dx = Math.abs(sx - ex);
+		int dy = Math.abs(sy - ey);
+		return dx + dy;
+	}
+
+	/**
+	 * 看看看得见的格子里有没有敌方格子。
+	 * 
+	 * @param info
+	 * @param x
+	 * @param y
+	 * @param side
+	 * @return
+	 */
+	public static boolean containsEnemyLoc(GameInfo info, int x, int y, int side) {
+		for (int[] loc : ActImit.getManhattan(x, y, 5)) {
+			int state = info.getField()[loc[0]][loc[1]];
+			int add = (1 - side) * 3;
+			if (state >= add && state <= add + 2) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

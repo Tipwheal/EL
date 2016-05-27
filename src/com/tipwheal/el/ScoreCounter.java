@@ -31,29 +31,36 @@ public class ScoreCounter {
 
 		for (int i = 0; i < lib.getNum(); i++) {
 			String action = lib.getActions(i);
-			System.err.print("I can do: " + action);
 			scores[i] += ocp.getOcpCounts(lib.getActions(i), x, y, ID, side);
 			if (avd.intoDgrArea(action, x, y, ID, side) && !atk.canAtk(action, x, y, ID, side)) {
-				System.err.print ("    He can attck me!");
 				scores[i] -= Strategy.AvdEnemy;
 			}
 			if (atk.canAtk(action, x, y, ID, side)) {
-				System.err.println("    I can attack him");
 				scores[i] += Strategy.AtkEnemy;
 			}
-			if(avd.intoMemDgrArea(action, x, y, ID, side)) {
+			if (avd.intoMemDgrArea(action, x, y, ID, side)) {
 				scores[i] -= Strategy.MemAvd;
 			}
 			if (action.endsWith("9")) {
-				scores[i] += Strategy.Hide;
-				if(avd.intoDgrArea("0", x, y, ID, side)) {
-//					scores[i] += Strategy.Dgr;
+				if (ActImit.containsEnemyLoc(info, x, y, side)) {
+					scores[i] += Strategy.Hide;
 				}
+				if (avd.intoDgrArea("0", x, y, ID, side)) {
+					scores[i] += Strategy.Dgr;
+				}
+			}
+			if (out.getMid(action, x, y, ID, side)) {
+				scores[i] += Strategy.Mid;
 			}
 			if (out.outHome(lib.getActions(i), x, y, 1, side)) {
 				scores[i] += Strategy.OutHome;
 			}
-			System.err.println("    It's score: " + scores[i]);
+			if (atk.canAtkNextTurn(action, x, y, ID, side)) {
+				scores[i] += Strategy.AtkNext;
+			}
+			if(avd.inOcpJustLoc(action, x, y, ID, side)) {
+				scores[i] -= Strategy.Just;
+			}
 		}
 	}
 
@@ -75,7 +82,6 @@ public class ScoreCounter {
 			}
 		}
 		int index = rnd.nextInt(actions.size());
-		System.err.println("So i do: " + actions.get(index));
 		return actions.get(index);
 	}
 }

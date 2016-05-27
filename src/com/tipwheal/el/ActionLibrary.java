@@ -83,9 +83,7 @@ public class ActionLibrary {
 			}
 		}
 		if (hidden == 1 && cost(action) <= 5) {
-			System.err.print("in    ");
 			action = action + " 9";
-			System.err.println(action);
 			if (check.validAction(action, x, y, hidden, ID, side) && !actions.contains(action)) {
 				actions.add(action);
 			}

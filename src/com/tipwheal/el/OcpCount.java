@@ -21,7 +21,7 @@ public class OcpCount {
 		for (int[] ocp : ActImit.getOcyCells(action, x, y, ID, side)) {
 			switch (info.getField()[ocp[1]][ocp[0]]) {
 			case 8:
-				num += 1;
+				num += Strategy.OcpBlank;
 				break;
 			case 0:
 			case 1:
@@ -30,7 +30,7 @@ public class OcpCount {
 			case 3:
 			case 4:
 			case 5:
-				num += 2;
+				num += Strategy.OcpEnemy;
 				break;
 			}
 		}

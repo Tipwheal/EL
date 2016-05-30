@@ -32,13 +32,17 @@ public class ScoreCounter {
 		for (int i = 0; i < lib.getNum(); i++) {
 			String action = lib.getActions(i);
 			scores[i] += ocp.getOcpCounts(lib.getActions(i), x, y, ID, side);
-			if (avd.intoDgrArea(action, x, y, ID, side) && !atk.canAtk(action, x, y, ID, side)) {
+			if (avd.intoDgrArea(action, x, y, ID, side) && (!atk.canAtk(action, x, y, ID, side))
+					&& !action.endsWith("9")) {
 				scores[i] -= Strategy.AvdEnemy;
+			}
+			if (avd.toCLose(action, x, y, ID, side)) {
+				scores[i] += Strategy.ToClose;
 			}
 			if (atk.canAtk(action, x, y, ID, side)) {
 				scores[i] += Strategy.AtkEnemy;
 			}
-			if (avd.intoMemDgrArea(action, x, y, ID, side)) {
+			if (avd.intoMemDgrArea(action, x, y, ID, side) && !action.endsWith("9")) {
 				scores[i] -= Strategy.MemAvd;
 			}
 			if (action.endsWith("9")) {
@@ -58,8 +62,17 @@ public class ScoreCounter {
 			if (atk.canAtkNextTurn(action, x, y, ID, side)) {
 				scores[i] += Strategy.AtkNext;
 			}
-			if(avd.inOcpJustLoc(action, x, y, ID, side)) {
+			if (avd.inOcpJustLoc(action, x, y, ID, side)) {
 				scores[i] -= Strategy.Just;
+			}
+			if (atk.seeAndHide(action, x, y, ID, side)) {
+				scores[i] += Strategy.SeeAndHide;
+			}
+			if (atk.getCloseTo(action, x, y, ID, side)) {
+				scores[i] += Strategy.GetCloseTo;
+			}
+			if (avd.tooDgr(action, x, y, ID, side)) {
+				scores[i] += Strategy.TooDgr;
 			}
 		}
 	}

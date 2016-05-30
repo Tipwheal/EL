@@ -38,6 +38,6 @@ public class MemoryInfo {
 	}
 
 	public ArrayList<int[]> getChangedLoc() {
-		return changedLoc;
+		return changedLoc;		
 	}
 }

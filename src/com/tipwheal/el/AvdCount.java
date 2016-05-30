@@ -145,4 +145,33 @@ public class AvdCount {
 		return false;
 	}
 
+	public boolean toCLose(String action, int x, int y, int ID, int side) {
+		int[] loc = ActImit.getNextCell(action, x, y);
+		for (int i = 3; i <= 5; i++) {
+			int ex = info.getSamuraiInfo()[i].getCurX();
+			int ey = info.getSamuraiInfo()[i].getCurY();
+			for (int[] eLoc : ActImit.getManhattan(ex, ey, 2)) {
+				if (loc[0] == eLoc[0] && loc[1] == eLoc[1]) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public boolean tooDgr(String action, int x, int y, int ID, int side) {
+		int lx = ActImit.getNextCell(action, x, y)[0];
+		int ly = ActImit.getNextCell(action, x, y)[1];
+		for (int i = 3; i <= 5; i++) {
+			int hx = info.getSamuraiInfo()[i].getHomeX();
+			int hy = info.getSamuraiInfo()[i].getHomeY();
+			for (int[] loc : ActImit.getManhattan(hx, hy, 3)) {
+				if (lx == loc[0] && ly == loc[1]) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 }
